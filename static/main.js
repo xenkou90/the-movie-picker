@@ -1,0 +1,1 @@
+/* JavaScript coming soon */

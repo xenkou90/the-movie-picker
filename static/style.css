@@ -1,0 +1,47 @@
+/* NAVBAR */
+.top-bar {
+    background-color: #d43d3d;
+    padding: 10px 20px;
+}
+
+.logo {
+    height: 35px;
+}
+
+/* MAIN 50/50 LAYOUT */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.main-container {
+    height: calc(100% - 80px); /*substract navbar height */
+    overflow: hidden;
+}
+
+.left-side {
+    background-color: #f8f9fa;
+}
+
+.right-side {
+    background-color: #61676c;
+    color: white;
+}
+
+/* BUTTON */
+.pick-btn {
+    font-size: 20px;
+    padding: 12px 25px;
+    background-color: #d43d3d;
+    border: none;
+}
+
+/* MOVIE CARS */
+.movie-card {
+    width: 350px;
+    min-height: 200px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
