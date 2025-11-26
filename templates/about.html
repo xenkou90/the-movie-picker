@@ -2,9 +2,92 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About - The Movie Picker</title>
+
+        <!-- BOOTSTRAP -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+
+        <!-- CUSTOM CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>About page placeholder</h1>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark top-bar">
+            <div class="container-fluid">
+
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="logo" class="logo">
+                </a>
+
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    <a class="nav-link" href="https://letterboxd.com/ne0n/" target="_blank">Follow me on Letterboxd!</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT SPLIT -->
+         <div class="container-fluid main-container">
+            <div class="row h-100">
+
+                <!-- LEFT SIDE -->
+                <div class="col-12 col-md-6 left-side d-flex flex-column justify-content-center align-items-start p-5">
+
+                    <h2 class="mb-4">About The Movie Picker</h2>
+
+                    <p class="about-text" style="font-size: 1.15rem; line-height: 1.7;">
+                    I love watching movies and they are my favorite way to relax and escape. 
+                    However, having seen so many over the years, choosing just one to watch has 
+                    become a real challenge. I often find myself stuck in endless indecision, 
+                    spending more time deciding what to watch than actually enjoying the movie. 
+                    This constant struggle inspired me to create this site to help both myself 
+                    and others make that choice easier and bring joy back to movie watching.
+                    <br><br>
+                    You can just hit the <strong>'Pick for me!'</strong> button or you can upload
+                    a CSV file with your watched movies and it will recommend movies you haven't
+                    seen yet!
+                     </p>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="col-12 col-md-6 right-side d-flex flex-column justify-content-center align-items-center p-5">
+
+                    <h3 class="text-white mb-4">These are my top 5+1 favorite films!</h3>
+
+                    <!-- BUTTON LIST FOR 6 MOVIES -->
+                    <div class="d-flex flex-column w-100" style="max-width: 350px;">
+
+                        <a href="https://letterboxd.com/film/all-that-jazz/" target="_blank" class="btn btn-light mb-2">All that Jazz (1979)</a>
+                        <a href="https://letterboxd.com/film/sorcerer/" target="_blank" class="btn btn-light mb-2">Sorcerer (1977)</a>
+                        <a href="https://letterboxd.com/film/the-cook-the-thief-his-wife-her-lover/" target="_blank" class="btn btn-light mb-2">The Cook, the Thief, His Wife & Her Lover (1989)</a>
+                        <a href="https://letterboxd.com/film/ran/" target="_blank" class="btn btn-light mb-2">Ran (1985)</a>
+                        <a href="https://letterboxd.com/film/my-cousin-vinny/" target="_blank" class="btn btn-light mb-2">My Cousin Vinny (1992)</a>
+                        <a href="https://letterboxd.com/film/bloodsport/" target="_blank" class="btn btn-light mb-2">Bloodsport (1988)</a>
+                    </div>
+
+                    <!-- GUESSING QUESTION -->
+                    <p class="text-white mt-2 mb-3 text-center">
+                        Which one do you think is my +1 and actually my favourite and the one I've seen hundreds of times?
+                    </p>
+
+                    <!-- GUESSING FORM -->
+                     <div class="input-group" style="max-width: 350px;">
+                        <input id="guess-input" type="text" class="form-control"
+                            placeholder="Enter the movie name here">
+
+                        <button id="guess-btn" type="button" class="btn btn-light">Submit</button>
+                     </div>
+
+                     <!-- RESULT TEXT -->
+                     <p id="guess-result" class="mt-3"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename='main.js') }}"></script>
     </body>
 </html>
