@@ -1,47 +1,199 @@
-/* NAVBAR */
+/* ---------------------------------------------------------
+   GLOBAL DESIGN SYSTEM — YOUR COLOR PALETTE & TYPOGRAPHY
+----------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f2f3f3;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+}
+
+/* ---------------------------------------------------------
+   NAVBAR
+----------------------------------------------------------*/
 .top-bar {
     background-color: #d43d3d;
-    padding: 10px 20px;
+    height: 70px;
 }
 
 .logo {
-    height: 35px;
+    height: 38px;
 }
 
-/* MAIN 50/50 LAYOUT */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
+/* ---------------------------------------------------------
+   LAYOUT (50/50 SPLIT)
+----------------------------------------------------------*/
 .main-container {
-    height: calc(100% - 80px); /*substract navbar height */
-    overflow: hidden;
+    padding-top: 0;  /* Remove this padding */
+    padding-bottom: 0;  /* Remove this padding */
+    flex: 1;  /* Add this */
+    display: flex;  /* Add this */
+    flex-direction: column;  /* Add this */
+}
+
+/* Add min-height to the row */
+.main-container .row {
+    flex: 1;
+    min-height: calc(100vh - 70px);  /* 70px is your navbar height */
 }
 
 .left-side {
-    background-color: #f8f9fa;
+    background-color: #f2f3f3;
+    color: #000;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Keep this */
+    align-items: center;
+}
+
+.left-side form {
+    margin-bottom: 20px;  /* Space between button and card */
 }
 
 .right-side {
     background-color: #61676c;
-    color: white;
+    color: #fff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: calc(100vh - 70px);
+    display: flex;  /* Add this */
+    flex-direction: column;  /* Add this */
+    justify-content: center;  /* Add this - centers vertically */
+    align-items: center;  /* Already there - centers horizontally */
 }
 
-/* BUTTON */
-.pick-btn {
-    font-size: 20px;
-    padding: 12px 25px;
+@media (max-width: 576px) {
+    .movie-card-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .movie-poster {
+        width: 220px;  /* Changed from 180px for mobile */
+        margin-bottom: 12px;
+    }
+    .movie-info {
+        text-align: center;
+    }
+}
+
+/* ---------------------------------------------------------
+   BUTTONS
+----------------------------------------------------------*/
+.pick-btn,
+.btn-danger {
     background-color: #d43d3d;
     border: none;
+    padding: 14px 26px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    height: 48px;
+    transition: 0.25s;
+    font-weight: 600;
+    color: #fff;
 }
 
-/* MOVIE CARDS */
-.movie-card {
-    width: 350px;
-    min-height: 200px;
-    background: white;
-    padding: 20px;
+.pick-btn:hover,
+.btn-danger:hover {
+    background-color: #d21616;
+}
+
+.btn-light {
     border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    height: 48px;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-light:hover {
+    background-color: #d21616;
+    color: #fff;
+}
+
+/* ---------------------------------------------------------
+   MOVIE CARD
+----------------------------------------------------------*/
+.movie-card {
+    background-color: #e4e5e5;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 650px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+    margin: 0 auto;
+}
+
+/* Horizontal movie card layout */
+.movie-card-content {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.movie-poster {
+    width: 180px;  /* Changed from 120px */
+    border-radius: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.movie-info {
+    flex: 1;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.movie-overview {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.35;
+    margin-bottom: 8px;
+}
+
+.movie-date {
+    font-size: 0.85rem;
+    color: #444;
+}
+
+/* ---------------------------------------------------------
+   ABOUT PAGE TEXT
+----------------------------------------------------------*/
+.about-text {
+    max-width: 600px;
+    color: #000;
+}
+
+/* ---------------------------------------------------------
+   ANIMATIONS
+----------------------------------------------------------*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fade 0.6s ease-out forwards;
+}
+
+@keyframes fade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
