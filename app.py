@@ -1,6 +1,8 @@
 import requests
 import os
 import sqlite3
+import csv
+import io
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__, instance_relative_config=True)
@@ -152,9 +154,43 @@ def reset_watched_movies():
 # ROUTES
 # -----------------------------
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    upload_message = None
+
+    if request.method == "POST":
+        file = request.files.get("csv_file")
+
+        if file and file.filename.endswith(".csv"):
+            text = file.read().decode("utf-8")
+            csv_reader = csv.DictReader(io.StringIO(text))
+
+            movies_to_add = []
+
+            for row in csv_reader:
+                title = row.get("Name")
+                year = row.get("Year")
+
+                # Convert year safely to integer or NONE
+                try:
+                    year = int(year)
+                except:
+                    year = None
+                
+                if title:
+                    movies_to_add.append((title, year))
+
+            # Add to DB
+            add_watched_movies(movies_to_add)
+
+            upload_message = f"Uploaded {len(movies_to_add)} movies!"
+
+        else:
+            upload_message = "Please upload a valid CSV file"
+
+    watched_count = len(get_watched_movies())
+
+    return render_template("index.html", upload_message=upload_message, watched_count=watched_count)
 
 @app.route("/about")
 def about():

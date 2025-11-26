@@ -53,14 +53,23 @@
 
                 <h3 class="text-white mb-4">Upload your Letterboxd Watched Movies CSV</h3>
 
+                <!-- CSV UPLOAD FORM -->
                 <form method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
-                    <ipnut type="file" name="scv_file" class="form-control mb-3" style="width: 250px;">
+                    <input type="file" name="csv_file" class="form-control mb-3" style="width: 250px;">
                     <button type="submit" class="btn btn-light mb-3">Upload</button>
                 </form>
 
-                <form method="POST" action="/reset">
+                <!-- FEEDBACK MESSAGES GO HERE -->
+                {% if upload_message %}
+                    <p class="text-light mt-2">{{ upload_message}}</p>
+                {% endif %}
+
+                <p class="text-light mt-2">Watched movies: {{ watched_count }}</p>
+
+                <!-- RESET BUTTON -->
+                <form method="POST" action="/reset" class="mt-3">
                     <button class="btn btn-danger">Reset CSV</button>
-                </form>
+                </form>                
             </div>
         </div>
     </div>
