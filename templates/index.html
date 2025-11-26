@@ -40,11 +40,21 @@
             <!-- Left Side -->
              <div class="col-12 col-md-6 left-side d-flex flex-column justify-content-center align-items-center">
 
-                <button class="btn btn-danger pick-btn">Pick for me!</button>
+                <form method="POST">
+                    <input type="hidden" name="action" value="pick">
+                    <button type="submit" class="btn btn-danger pick-btn">Pick for me!</button>
+                </form>
 
-                <!-- Placeholder for movie card -->
-                <div class="movie-card mt-4">
-                    <p>No movie selected yet.</p>
+                <!-- Movie Card -->
+                <div class="movie-card mt-4 text-center">
+                    {% if picked_movie %}
+                        <img src="{{ picked_movie.poster }}" alt="Poster" class="img-fluid mb-3" style="border-radius: 8px;">
+                        <h4>{{ picked_movie.title }}</h4>
+                        <p class="mt-2">{{ picked_movie.overview }}</p>
+                        <p class="text-muted">{{ picked_movie.release_date }}</p>
+                    {% else %}
+                        <p>No movie selected yet</p>
+                    {% endif %}
                 </div>
              </div>
 

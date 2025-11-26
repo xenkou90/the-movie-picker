@@ -157,40 +157,60 @@ def reset_watched_movies():
 @app.route("/", methods=["GET", "POST"])
 def index():
     upload_message = None
+    picked_movie = None
 
     if request.method == "POST":
-        file = request.files.get("csv_file")
 
-        if file and file.filename.endswith(".csv"):
-            text = file.read().decode("utf-8")
-            csv_reader = csv.DictReader(io.StringIO(text))
+        # -- 1. CSV UPLOAD --
+        if "csv_file" in request.files:
+            file=request.files.get("csv_file")
 
-            movies_to_add = []
+            if file and file.filename.endswith(".csv"):
+                text = file.read().decode("utf-8")
+                csv_reader = csv.DictReader(io.StringIO(text))
 
-            for row in csv_reader:
-                title = row.get("Name")
-                year = row.get("Year")
+                movies_to_add = []
 
-                # Convert year safely to integer or NONE
-                try:
-                    year = int(year)
-                except:
-                    year = None
-                
-                if title:
-                    movies_to_add.append((title, year))
+                for row in csv_reader:
+                    title = row.get("Name")
+                    year = row.get("Year")
 
-            # Add to DB
-            add_watched_movies(movies_to_add)
+                    try:
+                        year = int(year)
+                    except:
+                        year = None
 
-            upload_message = f"Uploaded {len(movies_to_add)} movies!"
+                    if title:
+                        movies_to_add.append((title, year))
 
-        else:
-            upload_message = "Please upload a valid CSV file"
+                add_watched_movies(movies_to_add)
+                upload_message = f"Uploaded {len(movies_to_add)} movies!"
+            
+            else:
+                upload_message = "Please upload a valid CSV file"
+
+        # -- 2. PICK FOR ME BUTTON --
+        elif request.form.get("action") == "pick":
+            all_movies = get_all_movies()
+            watched = get_watched_movies()
+            watched_titles = {w[0] for w in watched}
+
+            # Filter out watched movies
+            unwatched = [m for m in all_movies if m["title"] not in watched_titles]
+
+            if unwatched:
+                import random
+                picked_movie = random.choice(unwatched)
+            else:
+                picked_movie = None
+                upload_message = "You've watched all available movies!"
 
     watched_count = len(get_watched_movies())
 
-    return render_template("index.html", upload_message=upload_message, watched_count=watched_count)
+    return render_template("index.html",
+                           upload_message=upload_message,
+                           watched_count=watched_count,
+                           picked_movie=picked_movie)
 
 @app.route("/about")
 def about():
