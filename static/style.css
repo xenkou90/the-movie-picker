@@ -1,98 +1,132 @@
 /* ---------------------------------------------------------
-   GLOBAL DESIGN SYSTEM — YOUR COLOR PALETTE & TYPOGRAPHY
+   GLOBAL DESIGN SYSTEM — COLORS, TYPOGRAPHY, SPACING
+   This file defines the entire visual identity of the site.
 ----------------------------------------------------------*/
+
+/* Import Inter font family from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
+/* Ensure full height for layout calculations */
 html, body {
     height: 100%;
 }
 
+/* Base body styling used across all pages */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f2f3f3;
+    background-color: #f2f3f3;   /* Your left-side background color */
     color: #000;
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-
 }
 
+
+
 /* ---------------------------------------------------------
-   NAVBAR
+   NAVBAR — Fixed height + brand styling
 ----------------------------------------------------------*/
 .top-bar {
-    background-color: #d43d3d;
-    height: 70px;
+    background-color: #d43d3d; /* Brand red */
+    height: 70px;              /* Defined navbar height */
 }
 
 .logo {
-    height: 38px;
+    height: 38px;              /* Scales well on mobile + desktop */
 }
+
+
 
 /* ---------------------------------------------------------
-   LAYOUT (50/50 SPLIT)
+   MAIN LAYOUT — RESPONSIVE 50/50 SPLIT
 ----------------------------------------------------------*/
+
+/* Main wrapper that holds the two-page columns */
 .main-container {
-    padding-top: 0;  /* Remove this padding */
-    padding-bottom: 0;  /* Remove this padding */
-    flex: 1;  /* Add this */
-    display: flex;  /* Add this */
-    flex-direction: column;  /* Add this */
+    padding-top: 0;
+    padding-bottom: 0;
+    flex: 1;                     /* Allows the container to fill remaining space */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Add min-height to the row */
+/* The .row inside the container takes up the viewport height
+   minus the navbar. Prevents content from collapsing upward. */
 .main-container .row {
     flex: 1;
-    min-height: calc(100vh - 70px);  /* 70px is your navbar height */
+    min-height: calc(100vh - 70px);   /* Subtract navbar height */
 }
 
+
+/* ---------------- LEFT COLUMN ---------------- */
 .left-side {
-    background-color: #f2f3f3;
+    background-color: #f2f3f3;  /* Light background */
     color: #000;
     padding-top: 60px;
     padding-bottom: 60px;
     min-height: calc(100vh - 70px);
+    
+    /* Centers content perfectly vertically & horizontally */
     display: flex;
     flex-direction: column;
-    justify-content: center;  /* Keep this */
+    justify-content: center;
     align-items: center;
 }
 
 .left-side form {
-    margin-bottom: 20px;  /* Space between button and card */
+    margin-bottom: 20px; /* Space between button and movie card */
 }
 
+
+/* ---------------- RIGHT COLUMN ---------------- */
 .right-side {
-    background-color: #61676c;
+    background-color: #61676c;  /* Dark contrast background */
     color: #fff;
     padding-top: 60px;
     padding-bottom: 60px;
     min-height: calc(100vh - 70px);
-    display: flex;  /* Add this */
-    flex-direction: column;  /* Add this */
-    justify-content: center;  /* Add this - centers vertically */
-    align-items: center;  /* Already there - centers horizontally */
+
+    /* Center upload section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+
+
+/* ---------------------------------------------------------
+   MOBILE RESPONSIVE RULES
+   When screen width < 576px (Bootstrap "sm" breakpoint)
+----------------------------------------------------------*/
 @media (max-width: 576px) {
+
+    /* Movie card becomes vertical */
     .movie-card-content {
         flex-direction: column;
         text-align: center;
         align-items: center;
     }
+
+    /* Larger poster on mobile */
     .movie-poster {
-        width: 220px;  /* Changed from 180px for mobile */
+        width: 220px;
         margin-bottom: 12px;
     }
+
     .movie-info {
         text-align: center;
     }
 }
 
+
+
 /* ---------------------------------------------------------
-   BUTTONS
+   BUTTONS — Red primary + subtle rounded shape
 ----------------------------------------------------------*/
+
+/* Shared styling for pick button + danger (reset) button */
 .pick-btn,
 .btn-danger {
     background-color: #d43d3d;
@@ -100,17 +134,19 @@ body {
     padding: 14px 26px;
     font-size: 1.1rem;
     border-radius: 12px;
-    height: 48px;
+    height: 48px;          /* Mobile-friendly height */
     transition: 0.25s;
     font-weight: 600;
     color: #fff;
 }
 
+/* Hover tone swap */
 .pick-btn:hover,
 .btn-danger:hover {
     background-color: #d21616;
 }
 
+/* Light button (Upload, About page links) */
 .btn-light {
     border-radius: 10px;
     height: 48px;
@@ -123,20 +159,22 @@ body {
     color: #fff;
 }
 
+
+
 /* ---------------------------------------------------------
-   MOVIE CARD
+   MOVIE CARD — Poster + movie details container
 ----------------------------------------------------------*/
 .movie-card {
     background-color: #e4e5e5;
     padding: 20px;
     border-radius: 12px;
     width: 90%;
-    max-width: 650px;
+    max-width: 650px;         /* Wider layout for poster + text */
     box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
-    margin: 0 auto;
+    margin: 0 auto;           /* Center align */
 }
 
-/* Horizontal movie card layout */
+/* Horizontal layout for poster + info */
 .movie-card-content {
     display: flex;
     flex-direction: row;
@@ -144,17 +182,20 @@ body {
     align-items: flex-start;
 }
 
+/* Movie poster on the left */
 .movie-poster {
-    width: 180px;  /* Changed from 120px */
+    width: 180px;             /* Larger for visual impact */
     border-radius: 12px;
     flex-shrink: 0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* Right-side text group */
 .movie-info {
-    flex: 1;
+    flex: 1;                  /* Take remaining space */
 }
 
+/* Title styling */
 .movie-title {
     font-size: 1.2rem;
     font-weight: 700;
@@ -162,6 +203,7 @@ body {
     color: #000;
 }
 
+/* Overview description */
 .movie-overview {
     font-size: 0.95rem;
     color: #333;
@@ -169,21 +211,26 @@ body {
     margin-bottom: 8px;
 }
 
+/* Release date text */
 .movie-date {
     font-size: 0.85rem;
     color: #444;
 }
 
+
+
 /* ---------------------------------------------------------
-   ABOUT PAGE TEXT
+   ABOUT PAGE TEXT BLOCK
 ----------------------------------------------------------*/
 .about-text {
     max-width: 600px;
     color: #000;
 }
 
+
+
 /* ---------------------------------------------------------
-   ANIMATIONS
+   ANIMATIONS — Fade-in for movie card on pick
 ----------------------------------------------------------*/
 .fade-in {
     opacity: 0;
