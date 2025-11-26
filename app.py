@@ -158,6 +158,7 @@ def reset_watched_movies():
 def index():
     upload_message = None
     picked_movie = None
+    reset_message = request.args.get("reset")
 
     if request.method == "POST":
 
@@ -210,7 +211,14 @@ def index():
     return render_template("index.html",
                            upload_message=upload_message,
                            watched_count=watched_count,
-                           picked_movie=picked_movie)
+                           picked_movie=picked_movie,
+                           reset_message=reset_message)
+
+@app.route("/reset", methods=["POST"])
+def reset():
+    reset_watched_movies()  # clear database
+    return redirect("/?reset=1")    # reload homepage
+
 
 @app.route("/about")
 def about():

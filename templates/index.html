@@ -74,6 +74,10 @@
                     <p class="text-light mt-2">{{ upload_message}}</p>
                 {% endif %}
 
+                {% if reset_message %}
+                    <p class="text-light mt-2">Watchlist cleared</p>
+                {% endif %}
+
                 <p class="text-light mt-2">Watched movies: {{ watched_count }}</p>
 
                 <!-- RESET BUTTON -->
