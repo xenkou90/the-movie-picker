@@ -13,13 +13,11 @@ from flask import Flask, render_template, request, redirect
 app = Flask(__name__, instance_relative_config=True)
 
 
-
 # ------------------------------------------------------------
 # TMDB API CONFIGURATION
 # ------------------------------------------------------------
 TMDB_API_KEY = "6e7eb60ef8fd5b0fde286cfeb14fb692"
 TMDB_URL = "https://api.themoviedb.org/3/movie/popular"
-
 
 
 # ------------------------------------------------------------
@@ -63,54 +61,69 @@ def init_db():
 init_db()
 
 
-
 # ------------------------------------------------------------
 # TMDB API HELPER — Fetch Movies
 # ------------------------------------------------------------
-def get_all_movies(pages=3):
-    """
-    Fetch popular movies from TMDB across multiple pages.
-
-    Args:
-        pages (int): how many pages of results to request.
-
-    Returns:
-        A list of dictionaries, each with:
-        - title
-        - overview
-        - poster (full URL)
-        - release_date
-    """
+# Fetch a large and diverse pool of movies using TMDB Discover.
+# This increases variety compared to the standard 'popular' endpoint.
+# We fetch: 1. Most popular movies 2. Highest rated movies 3. Movies with high vote counts 4. Movies from random years 
+def get_all_movies():
 
     movies = []
+    movie_ids = set() # prevents duplicates
 
-    for page in range(1, pages + 1):
+    base_url = "https://api.themoviedb.org/3/discover/movie"
 
-        params = {
-            "api_key": TMDB_API_KEY,
-            "language": "en-US",
-            "page": page
-        }
+    # Different Discover configurations (more variety)
+    discover_sets = [
+        {"sort_by": "popularity.desc"},
+        {"sort_by": "vote_average.desc", "vote_count.gte": 500},
+        {"sort_by": "vote_count.desc"},
+        {"sort_by": "release_date.desc"},
+    ]
 
-        response = requests.get(TMDB_URL, params=params)
+    # Add RANDOM YEARS for even more variety
+    import random
+    random_years = random.sample(range(1980, 2024), 5)  # 5 random years
+
+    for year in random_years:
+        discover_sets.append({
+            "primary_release_year": year,
+            "sort_by": "popularity.desc"
+        })
+
+    # Fetch movies from all configurations
+    for params in discover_sets:
+        # Required API params
+        params["api_key"] = TMDB_API_KEY
+        params["language"] = "en-US"
+        params["page"] = 1  # Only first page needed because we use many variations
+
+        response = requests.get(base_url, params=params)
 
         if response.status_code != 200:
-            print("TMDB error:", response.text)
+            print("TMDB Discover error:", response.text)
             continue
 
-        data = response.json()
+        results = response.json().get("results", [])
 
-        # Convert TMDB results to our app’s simplified structure
-        for m in data["results"]:
+        for m in results:
+            movie_id = m["id"]
+
+            # Skip duplicates
+            if movie_id in movie_ids:
+                continue
+
+            movie_ids.add(movie_id)
+
             movies.append({
                 "title": m["title"],
                 "overview": m["overview"],
                 "poster": f"https://image.tmdb.org/t/p/w500{m['poster_path']}" if m["poster_path"] else None,
-                "release_date": m["release_date"],
+                "release_date": m["release_date"] if m["release_date"] else "N/A",
             })
 
     return movies
-
 
 
 # ------------------------------------------------------------
