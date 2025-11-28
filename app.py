@@ -337,6 +337,16 @@ def guess_page():
 
 
 # ------------------------------------------------------------
+# ROUTE — UPLOAD
+# ------------------------------------------------------------
+@app.route("/upload", methods=["GET", "POST"])
+def upload_page():
+    if request.method == "POST":
+        return index()  # reuse your existing CSV processing logic
+    return render_template("upload.html")
+
+
+# ------------------------------------------------------------
 # RUN THE APP
 # ------------------------------------------------------------
 if __name__ == "__main__":

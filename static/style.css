@@ -53,6 +53,13 @@ body {
     border: none;
 }
 
+/* Hide desktop links on mobile */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        display: none !important;
+    }
+}
+
 /* ---------------------------------------------------------
    MAIN LAYOUT (MOBILE FIRST)
 ----------------------------------------------------------*/

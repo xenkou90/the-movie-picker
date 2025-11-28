@@ -18,24 +18,27 @@
     <!-- ==========================================================
          NAVBAR — MOBILE FIRST
          ========================================================== -->
-    <nav class="navbar navbar-dark top-bar">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
+<nav class="navbar navbar-dark top-bar navbar-expand-md">
+    <div class="container-fluid">
 
-            <!-- LOGO -->
-            <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
-            </a>
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+        </a>
 
-            <!-- DESKTOP NAV LINKS -->
-            <div class="navbar-nav d-none d-md-flex">
-                <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                <a class="nav-link" href="https://letterboxd.com/ne0n/" target="_blank">Follow me on Letterboxd!</a>
-            </div>
+        <!-- MOBILE HAMBURGER -->
+        <button class="navbar-toggler d-md-none hamburger-btn" id="hamburger-btn" type="button">
+            ☰
+        </button>
 
-            <!-- MOBILE HAMBURGER BUTTON -->
-            <button class="hamburger-btn d-md-none" id="hamburger-btn">☰</button>
+        <!-- DESKTOP NAV LINKS -->
+        <div class="collapse navbar-collapse justify-content-end d-none d-md-flex">
+            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            <a class="nav-link" href="https://letterboxd.com/ne0n/" target="_blank">Follow me on Letterboxd!</a>
         </div>
-    </nav>
+
+    </div>
+</nav>
 
     <!-- ==========================================================
          MAIN CONTENT — MOBILE FIRST (only left side)
@@ -128,9 +131,9 @@
 
                 <a href="/" class="mobile-menu-link">Home</a>
                 <a href="/" class="mobile-menu-link">Pick for Me!</a>
+                <a href="/upload" class="mobile-menu-link">Upload CSV</a>
                 <a href="/about" class="mobile-menu-link">About</a>
                 <a href="/guess" class="mobile-menu-link">Guess my favourite!</a>
-
                 <a href="https://letterboxd.com/ne0n/"
                     target="_blank"
                     class="mobile-menu-link">Follow me on Letterboxd!</a>
