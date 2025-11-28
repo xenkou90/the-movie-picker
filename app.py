@@ -328,6 +328,13 @@ def about():
     return render_template("about.html")
 
 
+# ------------------------------------------------------------
+# ROUTE — GUESSING GAME
+# ------------------------------------------------------------
+@app.route("/guess")
+def guess_page():
+    return render_template("guess.html")
+
 
 # ------------------------------------------------------------
 # RUN THE APP

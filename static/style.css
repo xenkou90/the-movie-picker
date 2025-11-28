@@ -1,68 +1,60 @@
 /* ---------------------------------------------------------
    GLOBAL DESIGN SYSTEM — MOBILE FIRST
-   Colors, Typography, Layout, Buttons, Components
-   ----------------------------------------------------------*/
-
-/* Google Fonts */
+----------------------------------------------------------*/
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/* Reset + smoothing */
-html, body { height: 100%; margin: 0; padding: 0; }
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f2f3f3;   /* Left-side background color */
-    display: flex;
-    flex-direction: column;
-    color: #000;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-*, *::before, *::after {
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     transition: all 0.25s ease;
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f2f3f3;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+}
 
 /* ---------------------------------------------------------
-   NAVBAR - MOBILE FIRST
+   NAVBAR — MOBILE FIRST
 ----------------------------------------------------------*/
 .top-bar {
-    height: 70px;
     background-color: #d43d3d;
-    display: flex;
-    align-items: center;
+    height: 70px;
 }
 
 .logo {
     height: 52px;
 }
 
-.nav-link:hover {
-    color: #fff;
-    text-shadow: 0 0 6px rgba(255,255,255,0.6);
+.nav-link {
+    color: white !important;
+    font-weight: 600;
 }
 
-/* Visible only on mobile */
+.nav-link:hover {
+    color: #fff !important;
+    text-shadow: 0 0 6px rgba(255,255,255,0.8);
+}
+
 .hamburger-btn {
     font-size: 2rem;
     color: white;
     background: none;
     border: none;
-    display: block;
-}
-
-/* Hidden automatically on desktop */
-@media (min-width: 768px) {
-    .hamburger-btn {
-        display: none;
-    }
 }
 
 /* ---------------------------------------------------------
-   MAIN LAYOUT — MOBILE FIRST
+   MAIN LAYOUT (MOBILE FIRST)
 ----------------------------------------------------------*/
 .main-container {
     flex: 1;
@@ -75,80 +67,42 @@ body {
     min-height: calc(100vh - 70px);
 }
 
-/* ---------------- LEFT SIDE (Mobile) ---------------- */
+/* ---------------------------------------------------------
+   LEFT SIDE (mobile)
+----------------------------------------------------------*/
 .left-side {
     background-color: #f2f3f3;
-    padding: 30px 20px;
+    padding: 40px 20px;
+    min-height: calc(100vh - 70px);
+    text-align: center;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* ---------------- RIGHT SIDE (Mobile) ---------------- */
-.right-side {
-    background-color: #61676c;
-    padding: 30px 20px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Desktop layout (2 columns) */
-@media (min-width: 768px) {
-    .left-side,
-    .right-side {
-        padding: 60px;
-        justify-content: center;
-        min-height: calc(100vh - 70px);
-    }
+    justify-content: flex-start;
 }
 
 /* ---------------------------------------------------------
-   BUTTONS — MOBILE FIRENDLY
+   RIGHT SIDE (desktop only)
 ----------------------------------------------------------*/
-.pick-btn,
-.btn-danger {
-    background-color: #d43d3d;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1.3rem;
-    font-weight: 900;
-    border-radius: 12px;
-    color: #fff;
-    height: 48px;
-    margin: 12px 0;
-}
+.right-side {
+    background-color: #61676c;
+    color: white;
+    padding: 60px 20px;
 
-.pick-btn:hover,
-.btn-danger:hover {
-    background-color: #b70f0f;
-    transform: translateY(-2px) scale(1.02);
-}
-
-.btn-light {
-    border-radius: 10px;
-    height: 48px;
-    padding: 10px 16px;
-    font-weight: 600;
-}
-
-.btn-light:hover {
-    background-color: #d21616;
-    color: #fff;
+    display: none; /* hidden on mobile */
 }
 
 /* ---------------------------------------------------------
    MOVIE CARD — MOBILE FIRST
 ----------------------------------------------------------*/
 .movie-card {
-    width: 100%;
-    max-width: 600px;
+    width: 90%;
     background-color: #e4e5e5;
-    padding: 20px;
-    margin: 20px auto;
+    margin: 25px auto 10px;
+    padding: 18px;
     border-radius: 12px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 .movie-card-content {
@@ -159,149 +113,125 @@ body {
 }
 
 .movie-poster {
-    width: 100%;
-    max-width: 260px;
+    width: 220px;
     border-radius: 12px;
+    margin-bottom: 12px;
     box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    margin-bottom: 15px;
-}
-
-.movie-info {
-    width: 100%;
 }
 
 .movie-title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 10px;
 }
 
 .movie-overview {
     font-size: 1rem;
-    color: #222;
+    margin: 12px 0;
     line-height: 1.4;
 }
 
-/* Release date text */
 .movie-date strong {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 800;
-    color: #444;
-}
-
-/* Desktop: Horizontal card layout */
-@media (min-width: 768px) {
-    .movie-card-content {
-        flex-direction: row;
-        text-align: left;
-        align-items: flex-start;
-    }
-
-    .movie-info {
-        padding-left: 16px;
-    }
-
-    .movie-poster {
-        width: 250px;
-    }
 }
 
 /* ---------------------------------------------------------
-   ABOUT PAGE - TEXT + BUTTONS 
+   BUTTONS
+----------------------------------------------------------*/
+.pick-btn,
+.btn-danger {
+    background-color: #d43d3d;
+    color: white;
+    height: 48px;
+    padding: 0 26px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 12px;
+    margin: 14px 0;
+}
+
+.pick-btn:hover,
+.btn-danger:hover {
+    background-color: #b60f0f;
+}
+
+.btn-light {
+    background: white;
+    color: #000 !important;
+    font-weight: 600;
+    border-radius: 10px;
+    height: 48px;
+}
+
+.btn-light:hover {
+    background: #d43d3d !important;
+    color: white !important;
+}
+
+/* ---------------------------------------------------------
+   ABOUT PAGE — MOBILE FIRST
 ----------------------------------------------------------*/
 .about-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
-    line-height: 1.7;
     max-width: 800px;
-    margin: 0 auto;
-    color: #000;
-    padding: 0 10px;
+    margin-top: 20px;
+    text-align: left;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* Favorite movie buttons */
 .about-movie-btn {
-    font-family: 'Cinzel', serif;
     background-color: #e3e9e9;
-    color: #000;
-    padding: 12px 16px;
-    margin-bottom: 12px;
+    padding: 12px;
+    color: black;
+    font-family: 'Cinzel', serif;
     border-radius: 10px;
+    margin-bottom: 10px;
     text-align: center;
+    text-decoration: none;
     border: 2px solid transparent;
-    text-decoratin: none;
+    display: block;
+    font-weight: 600;
 }
 
 .about-movie-btn:hover {
     background-color: #d43d3d;
     color: #fff;
-    border-color: #d43d3d;
-    transform: translateY(-2px) scale(1.02);
 }
 
 /* ---------------------------------------------------------
-   NAVBAR MOBILE FIX — Hide desktop links & show hamburger
+   MOBILE MENU OVERLAY
 ----------------------------------------------------------*/
-@media (max-width: 768px) {
-
-    /* Hide desktop navigation links */
-    .navbar-nav {
-        display: none !important;
-    }
-
-    /* Navbar spacing clean-up */
-    .navbar {
-        justify-content: space-between !important;
-        padding-right: 12px;
-    }
-
-    /* Logo alignment */
-    .navbar-brand {
-        margin-left: 8px;
-    }
-
-    /* Hamburger visible on mobile */
-    .hamburger-btn {
-        display: block !important;
-        color: #fff;
-        font-size: 2rem;
-        border: none;
-        background: none;
-        padding: 0;
-        margin-right: 10px;
-    }
-}
-
-
-/* ------------------------------------------
-   MOBILE MENU MODAL
--------------------------------------------*/
 .mobile-menu-overlay {
     display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.65);
+    z-index: 9999;
+
     justify-content: center;
     align-items: center;
-    z-index: 9999;
 }
 
 .mobile-menu-content {
+    width: 80%;
+    max-width: 320px;
     background: #f2f3f3;
-    padding: 30px;
-    width:80%;
-    max-width: 300px;
+    padding: 25px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .mobile-menu-link {
     display: block;
     padding: 14px 0;
-    margin: 6px 0;
     font-size: 1.2rem;
-    font-weight: 700;
     color: #333;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -316,11 +246,12 @@ body {
     color: white;
     border: none;
     border-radius: 8px;
+    font-weight: bold;
 }
 
-/* =========================================================
-   GUESSING GAME MODAL
-   ========================================================= */
+/* ---------------------------------------------------------
+   GUESS MODAL
+----------------------------------------------------------*/
 .guess-modal {
     display: none;
     position: fixed;
@@ -333,13 +264,12 @@ body {
 }
 
 .guess-modal-content {
-    background: #fff;
+    background: white;
     padding: 20px;
     border-radius: 12px;
-    max-width: 350px;
     width: 90%;
+    max-width: 350px;
     text-align: center;
-    animation: modal-pop 0.4s ease;
 }
 
 .guess-modal-content img {
@@ -350,26 +280,41 @@ body {
 
 .modal-close-btn {
     background: #d43d3d;
-    color: #fff;
+    color: white;
     padding: 10px 20px;
     border-radius: 8px;
     border: none;
-}
-
-@keyframes modal-pop {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    font-weight: 600;
 }
 
 /* ---------------------------------------------------------
-   ANIMATIONS — Fade-in for movie card on pick
+   DESKTOP OVERRIDES (min-width: 768px)
 ----------------------------------------------------------*/
-.fade-in {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fade 0.8s cubic-bezier(.21,.98,.6,1.02) forwards;
-}
+@media (min-width: 768px) {
 
-@keyframes fade {
-    to { opacity: 1; transform: translateY(0); }
+    .left-side {
+        justify-content: center;
+    }
+
+    .movie-card-content {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .movie-poster {
+        width: 260px;
+        margin-right: 20px;
+    }
+
+    .movie-info {
+        flex: 1;
+    }
+
+    /* Right side becomes visible */
+    .right-side {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
