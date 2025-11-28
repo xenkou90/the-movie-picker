@@ -1,7 +1,6 @@
 // --------------------------------------------------------------
 // MOVIE GUESSING GAME LOGIC
 // --------------------------------------------------------------
-//
 // This script powers the interactive guessing feature on the
 // About page. It listens for button clicks or Enter key presses,
 // compares the user’s guess against the correct movie, and 
@@ -33,22 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function: Compare the input value with the correct answer
     // ----------------------------------------------------------
     function checkGuess() {
-        // Get input, remove whitespace, make lowercase
         const guess = input.value.trim().toLowerCase();
-
-        // If user submitted an empty guess, ignore
         if (!guess) return;
 
-        // If correct
-        if (guess === CORRECT_ANSWER) {
-            result.textContent = "You are correct!";
-            result.style.color = "limegreen";
+        const modal = document.getElementById("guess-modal");
+        const modalImg = document.getElementById("guess-modal-img");
 
-        // If incorrect
+        if (guess === CORRECT_ANSWER) {
+            modalImg.src = "/static/correct.jpg";
         } else {
-            result.textContent = "Try again!";
-            result.style.color = "red";
+            modalImg.src = "/static/wrong.jpg";
         }
+
+        modal.style.display = "flex"  // show modal
     }
 
 
@@ -73,4 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Close button handler
+    const closeBtn = document.getElementById("guess-modal-close");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            document.getElementById("guess-modal").style.display = "none";
+        });
+    }
 });

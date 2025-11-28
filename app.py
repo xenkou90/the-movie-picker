@@ -62,13 +62,30 @@ init_db()
 
 
 # ------------------------------------------------------------
+# MOVIE CACHE (prevents slow re-fetching)
+# ------------------------------------------------------------
+cached_movies = []
+cached_timestamp = None
+
+
+# ------------------------------------------------------------
 # TMDB API HELPER — Fetch Movies
 # ------------------------------------------------------------
 # Fetch a large and diverse pool of movies using TMDB Discover.
 # This increases variety compared to the standard 'popular' endpoint.
 # We fetch: 1. Most popular movies 2. Highest rated movies 3. Movies with high vote counts 4. Movies from random years 
+import time
+
 def get_all_movies():
 
+    global cached_movies, cached_timestamp
+
+    # If cache exists and is not older than 6 hours -> use it
+    if cached_movies and cached_timestamp:
+        if time.time() - cached_timestamp < 6 * 3600:
+            return cached_movies
+
+    # Otherwise fetch fresh movie
     movies = []
     movie_ids = set() # prevents duplicates
 
