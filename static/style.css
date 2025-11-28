@@ -283,6 +283,66 @@ button:hover {
 }
 
 
+/* ------------------------------------------
+   MOBILE MENU OVERLAY (Modal Style)
+-------------------------------------------*/
+.mobile-menu-overlay {
+    display: none; /* hidden at start */
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 9999;
+
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menu content centered */
+.mobile-menu-content {
+    background: #f2f3f3;
+    padding: 30px;
+    width:80%;
+    max-width: 300px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Menu links */
+.mobile-menu-link {
+    display: block;
+    padding: 14px 0;
+    margin: 6px 0;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.mobile-menu-link:hover {
+    color: #d43d3d;
+}
+
+/* Close button */
+.mobile-close-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background: #d43d3d;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* Hamburger button (MOBILE ONLY) */
+.hamburger-btn {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+}
+
+
 /* ---------------------------------------------------------
    ANIMATIONS — Fade-in for movie card on pick
 ----------------------------------------------------------*/

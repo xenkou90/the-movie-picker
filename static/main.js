@@ -77,3 +77,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+
+// --------------------------------------------------------------
+// MOBILE HAMBURGER MENU
+// --------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menu = document.getElementById("mobile-menu");
+    const openBtn = document.getElementById("hamburger-btn");
+    const closeBtn = document.getElementById("mobile-meny-close");
+
+    if (openBtn) {
+        openBtn.addEventListener("click", () => {
+            menu.style.display = "flex";
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            menu.style.display = "none";
+        });
+    }
+});

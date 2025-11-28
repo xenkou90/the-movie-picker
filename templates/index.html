@@ -15,131 +15,133 @@
 </head>
 
 <body>
+    <!-- ==========================================================
+         NAVBAR — MOBILE FIRST
+         ========================================================== -->
+    <nav class="navbar navbar-dark top-bar">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
 
-    <!-- NAVBAR (logo on the left, links on the right) -->
-    <nav class="navbar navbar-expand-lg navbar-dark top-bar">
-        <div class="container-fluid">
-
-            <!-- Logo (links back to homepage) -->
+            <!-- LOGO -->
             <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
             </a>
 
-            <!-- Navigation links -->
-            <div class="navbar-nav ms-auto">
+            <!-- DESKTOP NAV LINKS -->
+            <div class="navbar-nav d-one d-md-flex">
                 <a class="nav-link" href="{{ url_for('about') }}">About</a>
                 <a class="nav-link" href="https://letterboxd.com/ne0n/" target="_blank">Follow me on Letterboxd!</a>
             </div>
 
+            <!-- MOBILE HAMBURGER BUTTON -->
+            <button class="hamburger-btn d-md-none" id="hamburger-btn">☰</button>
         </div>
     </nav>
 
+    <!-- ==========================================================
+         MAIN CONTENT — MOBILE FIRST (only left side)
+         Desktop: 50/50 split
+         ========================================================== -->
+         <div class="container-fluid main-container">
+            <div class="row">
 
+                <!-- LEFT SIDE (Always Visible) -->
+                <div class="col-12 col-md-6 left-side d-flex flex-column align-items-center pt-5">
 
-    <!-- MAIN CONTENT: 50/50 PAGE SPLIT -->
-    <div class="container-fluid main-container">
-        <div class="row">
+                    <!-- Pick for Me BUTTON -->
+                    <form method="POST">
+                        <input type="hidden" name="action" value="pick">
+                        <button type="submit" class="btn btn-danger pick-btn">Pick for me!</button>
+                    </form>
 
+                    <!-- MOVIE CARD (only shown if picked_movie exists) -->
+                     <div class="movie-card mt-4 fade-in">
+                        {% if picked_movie %}
+                        <div class="movie-card-content">
 
+                            <!-- Poster -->
+                            <img src="{{ picked_movie.poster }}" alt="Poster" class="movie-poster">
 
-            <!-- ============================
-                 LEFT SIDE (Pick button + Movie card)
-                 ============================ -->
-            <div class="col-12 col-md-6 left-side d-flex flex-column align-items-center pt-5">
+                            <!-- Info -->
+                            <div class="movie-info">
 
-                <!-- "Pick for me" Button (POST form triggers movie selection) -->
-                <form method="POST">
-                    <input type="hidden" name="action" value="pick">
-                    <button type="submit" class="btn btn-danger pick-btn">Pick for me!</button>
-                </form>
+                                <h4 class="movie-title">{{ picked_movie.title }}</h4>
 
+                                <p class="movie-overview">
+                                    {{ picked_movie.overview }}
+                                </p>
 
-                <!-- MOVIE CARD (only shown if picked_movie exists) -->
-                <div class="movie-card mt-4 fade-in">
+                                <!-- Formatted release date -->
+                                <p class="movie-date">
+                                    <strong>Release Date:</strong>
+                                    {% set y, m, d = picked_movie.release_date.split('-') %}
+                                    {% set months = {
+                                        '01':'JAN', '02':'FEB', '03':'MAR', '04':'APR',
+                                        '05':'MAY', '06':'JUN', '07':'JUL', '08':'AUG',
+                                        '09':'SEP', '10':'OCT', '11':'NOV', '12':'DEC'
+                                    } %}
+                                    {{ d }} {{ months[m] }} {{ y }}
+                                </p>
+                            </div>
+                        </div>
 
-                    {% if picked_movie %}
-                    <div class="movie-card-content">
+                        {% else %}
+                        <p>No movie selected yet.</p>
+                        {% endif %}
+                     </div>
 
-                        <!-- Poster image -->
-                        <img src="{{ picked_movie.poster }}" alt="Poster" class="movie-poster">
+                </div> <!-- END LEFT SIDE -->
 
-                        <!-- Movie text info -->
-                        <div class="movie-info">
+                <!-- RIGHT SIDE (DESKTOP ONLY) -->
+                <div class="col-12 col-md-6 right-side d-none d-md-flex flex-column align-items-center pt-5 pb-5">
 
-                            <!-- Title -->
-                            <h4 class="movie-title">{{ picked_movie.title }}</h4>
+                    <h3 class="text-white mb-4">Go for Pick for Me! or toss in your CSV and I will reveal what you have not seen.</h3>
 
-                            <!-- Overview -->
-                            <p class="movie-overview">
-                                {{ picked_movie.overview }}
-                            </p>
+                    <form method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+                        <input type="file" name="csv_file" class="form-control mb-3" style="width: 250px">
+                        <button type="submit" class="btn btn-light mb-3">Upload</button>
+                    </form>
 
-                            <!-- Release date -->
-                            <p class="movie-date">
-                                <strong>Release Date:</strong>
-                                {% set y, m, d = picked_movie.release_date.split('-') %}
-                                {% set months = {
-                                    '01':'JAN', '02':'FEB', '03':'MAR', '04':'APR', 
-                                    '05':'MAY', '06':'JUN', '07':'JUL', '08':'AUG', 
-                                    '09':'SEP', '10':'OCT', '11':'NOV', '12':'DEC' 
-                                } %}
-                                {{ d }} {{ months[m] }} {{ y }}
-                            </p>
-
-                        </div> <!-- END .movie-info -->
-
-                    </div> <!-- END .movie-card-content -->
-
-                    {% else %}
-                    <!-- Fallback when no movie has been selected yet -->
-                    <p>No movie selected yet.</p>
+                    {% if upload_message %}
+                        <p class="text-light mt-2">{{ upload_message }}</p>
                     {% endif %}
 
-                </div> <!-- END .movie-card -->
+                    {% if reset_message %}
+                        <p class="text-light mt-2">Watchlist cleared</p>
+                    {% endif %}
 
-            </div> <!-- END LEFT COLUMN -->
+                    <p class="text-light mt-2">Watched movies: {{ watched_count }}</p>
 
+                    <form method="POST" action="/reset" class="mt-3">
+                        <button class="btn btn-danger">Reset CSV</button>
+                    </form>
 
+                </div> <!-- END RIGHT SIDE -->
 
-            <!-- ============================
-                 RIGHT SIDE (CSV upload + reset)
-                 ============================ -->
-            <div class="col-12 col-md-6 right-side d-flex flex-column align-items-center pt-5 pb-5">
+            </div> <!-- END ROW -->
+        </div> <!-- END MIN CONTAINER -->
 
-                <!-- Section title -->
-                <h3 class="text-white mb-4">Upload your Letterboxd Watched Movies CSV</h3>
+    <!-- ==========================================================
+         MOBILE MENU OVERLAY MODAL
+         ========================================================== -->
+        <div id="mobile-menu" class="mobile-menu-overlay">
+            <div class="mobile-menu-content">
 
-                <!-- CSV Upload Form -->
-                <form method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
-                    <input type="file" name="csv_file" class="form-control mb-3" style="width: 250px;">
-                    <button type="submit" class="btn btn-light mb-3">Upload</button>
-                </form>
+                <a href="/" class="mobile-menu-link">Home</a>
+                <a href="/" class="mobile-menu-link">Pick for Me!</a>
+                <a href="/about" class="mobile-menu-link">About</a>
+                <a href="/guess" class="mobile-menu-link">Guess my favourite!</a>
 
-                <!-- Feedback message after upload -->
-                {% if upload_message %}
-                    <p class="text-light mt-2">{{ upload_message }}</p>
-                {% endif %}
+                <a href="https://letterboxd.com/ne0n/"
+                    target="_blank"
+                    class="mobile-menu-link">Follow me on Letterboxd!</a>
+                
+                <button id="mobile-menu-close" class="mobile-close-btn">Close</button>
 
-                <!-- Reset confirmation message -->
-                {% if reset_message %}
-                    <p class="text-light mt-2">Watchlist cleared</p>
-                {% endif %}
+            </div>
+        </div>
 
-                <!-- Count of watched movies -->
-                <p class="text-light mt-2">Watched movies: {{ watched_count }}</p>
-
-                <!-- Reset button (POST to /reset) -->
-                <form method="POST" action="/reset" class="mt-3">
-                    <button class="btn btn-danger">Reset CSV</button>
-                </form>
-
-            </div> <!-- END RIGHT COLUMN -->
-
-
-
-        </div> <!-- END ROW -->
-    </div> <!-- END MAIN CONTAINER -->
-
+        <!-- JS -->
+        <script src="{{ url_for('static', filename='main.js') }}"></script>
 
 </body>
 </html>
