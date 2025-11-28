@@ -139,6 +139,9 @@ def get_all_movies():
                 "poster": f"https://image.tmdb.org/t/p/w500{m['poster_path']}" if m["poster_path"] else None,
                 "release_date": m["release_date"] if m["release_date"] else "N/A",
             })
+    # Save to cache
+    cached_movies = movies
+    cached_timestamp = time.time()
 
     return movies
 
