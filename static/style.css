@@ -238,6 +238,40 @@ body {
     transform: translateY(-2px) scale(1.02);
 }
 
+/* ---------------------------------------------------------
+   NAVBAR MOBILE FIX — Hide desktop links & show hamburger
+----------------------------------------------------------*/
+@media (max-width: 768px) {
+
+    /* Hide desktop navigation links */
+    .navbar-nav {
+        display: none !important;
+    }
+
+    /* Navbar spacing clean-up */
+    .navbar {
+        justify-content: space-between !important;
+        padding-right: 12px;
+    }
+
+    /* Logo alignment */
+    .navbar-brand {
+        margin-left: 8px;
+    }
+
+    /* Hamburger visible on mobile */
+    .hamburger-btn {
+        display: block !important;
+        color: #fff;
+        font-size: 2rem;
+        border: none;
+        background: none;
+        padding: 0;
+        margin-right: 10px;
+    }
+}
+
+
 /* ------------------------------------------
    MOBILE MENU MODAL
 -------------------------------------------*/
