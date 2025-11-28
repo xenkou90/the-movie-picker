@@ -1,169 +1,136 @@
 /* ---------------------------------------------------------
-   GLOBAL DESIGN SYSTEM — COLORS, TYPOGRAPHY, SPACING
-   This file defines the entire visual identity of the site.
-----------------------------------------------------------*/
+   GLOBAL DESIGN SYSTEM — MOBILE FIRST
+   Colors, Typography, Layout, Buttons, Components
+   ----------------------------------------------------------*/
 
-/* Import Inter font family from Google Fonts */
+/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/* Ensure full height for layout calculations */
-html, body {
-    height: 100%;
-}
-
-/* Base body styling used across all pages */
+/* Reset + smoothing */
+html, body { height: 100%; margin: 0; padding: 0; }
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f2f3f3;   /* Your left-side background color */
-    color: #000;
+    background-color: #f2f3f3;   /* Left-side background color */
     display: flex;
     flex-direction: column;
-    margin: 0;
-    padding: 0;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+*, *::before, *::after {
+    box-sizing: border-box;
     transition: all 0.25s ease;
 }
 
 
 /* ---------------------------------------------------------
-   NAVBAR — Fixed height + brand styling
+   NAVBAR - MOBILE FIRST
 ----------------------------------------------------------*/
 .top-bar {
-    background-color: #d43d3d; /* Brand red */
-    height: 70px;              /* Defined navbar height */
+    height: 70px;
+    background-color: #d43d3d;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
-    height: 52px;              /* Scales well on mobile + desktop */
-}
-
-.nav-link {
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    height: 52px;
 }
 
 .nav-link:hover {
     color: #fff;
-    text-shadow: 0 0 6px rgba(255,255,255,0.7);
+    text-shadow: 0 0 6px rgba(255,255,255,0.6);
 }
 
+/* Visible only on mobile */
+.hamburger-btn {
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    display: block;
+}
+
+/* Hidden automatically on desktop */
+@media (min-width: 768px) {
+    .hamburger-btn {
+        display: none;
+    }
+}
 
 /* ---------------------------------------------------------
-   MAIN LAYOUT — RESPONSIVE 50/50 SPLIT
+   MAIN LAYOUT — MOBILE FIRST
 ----------------------------------------------------------*/
-
-/* Main wrapper that holds the two-page columns */
 .main-container {
-    padding-top: 0;
-    padding-bottom: 0;
-    flex: 1;                     /* Allows the container to fill remaining space */
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* The .row inside the container takes up the viewport height
-   minus the navbar. Prevents content from collapsing upward. */
 .main-container .row {
     flex: 1;
-    min-height: calc(100vh - 70px);   /* Subtract navbar height */
+    min-height: calc(100vh - 70px);
 }
 
-/* ---------------- LEFT COLUMN ---------------- */
+/* ---------------- LEFT SIDE (Mobile) ---------------- */
 .left-side {
-    background-color: #f2f3f3;  /* Light background */
-    color: #000;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    min-height: calc(100vh - 70px);
-    
-    /* Centers content perfectly vertically & horizontally */
+    background-color: #f2f3f3;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-.left-side form {
-    margin-bottom: 10px; /* Space between button and movie card */
-}
-
-/* ---------------- RIGHT COLUMN ---------------- */
+/* ---------------- RIGHT SIDE (Mobile) ---------------- */
 .right-side {
-    background-color: #61676c;  /* Dark contrast background */
+    background-color: #61676c;
+    padding: 30px 20px;
     color: #fff;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    min-height: calc(100vh - 70px);
-
-    /* Center upload section */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-
-/* ---------------------------------------------------------
-   MOBILE RESPONSIVE RULES
-   When screen width < 576px (Bootstrap "sm" breakpoint)
-----------------------------------------------------------*/
-@media (max-width: 576px) {
-
-    /* Movie card becomes vertical */
-    .movie-card-content {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-
-    /* Larger poster on mobile */
-    .movie-poster {
-        width: 220px;
-        margin-bottom: 12px;
-    }
-
-    .movie-info {
-        text-align: center;
+/* Desktop layout (2 columns) */
+@media (min-width: 768px) {
+    .left-side,
+    .right-side {
+        padding: 60px;
+        justify-content: center;
+        min-height: calc(100vh - 70px);
     }
 }
 
-
 /* ---------------------------------------------------------
-   BUTTONS — Red primary + subtle rounded shape
+   BUTTONS — MOBILE FIRENDLY
 ----------------------------------------------------------*/
-
-/* Shared styling for pick button + danger (reset) button */
 .pick-btn,
 .btn-danger {
     background-color: #d43d3d;
     border: none;
-    padding: center;
+    padding: 12px 20px;
     font-size: 1.3rem;
-    border-radius: 12px;
-    height: 48px;          /* Mobile-friendly height */
-    transition: 0.25s;
     font-weight: 900;
+    border-radius: 12px;
     color: #fff;
-    /* extra spacing above and below pick button */
-    margin-bottom: 12px; /* prevents crowding */
-    margin-top: 12px;
+    height: 48px;
+    margin: 12px 0;
 }
 
-/* Hover tone swap */
 .pick-btn:hover,
 .btn-danger:hover {
-    background-color: #d21616;
+    background-color: #b70f0f;
+    transform: translateY(-2px) scale(1.02);
 }
 
-/* Light button (Upload, About page links) */
 .btn-light {
     border-radius: 10px;
     height: 48px;
+    padding: 10px 16px;
     font-weight: 600;
-    transition: 0.25s;
 }
 
 .btn-light:hover {
@@ -171,64 +138,48 @@ body {
     color: #fff;
 }
 
-/* Button interactions - Hover transform */
-button:hover {
-    transform: translateY(-2px) scale(1.03);
-}
-
-
 /* ---------------------------------------------------------
-   MOVIE CARD — Poster + movie details container
+   MOVIE CARD — MOBILE FIRST
 ----------------------------------------------------------*/
 .movie-card {
+    width: 100%;
+    max-width: 600px;
     background-color: #e4e5e5;
     padding: 20px;
+    margin: 20px auto;
     border-radius: 12px;
-    width: 70%;
-    max-width: 650px;         /* Wider layout for poster + text */
     box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
-    margin: 0 auto;           /* Center align */
-    margin-top: 30px; /* better breathing room */
-    margin-bottom: 20px;
 }
 
-/* Horizontal layout for poster + info */
 .movie-card-content {
     display: flex;
-    flex-direction: row;
-    gap: 16px;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-/* Movie poster on the left */
 .movie-poster {
-    width: 250px;             /* Larger for visual impact */
-    border: 2px solid rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 260px;
     border-radius: 12px;
-    flex-shrink: 0;
     box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    margin-bottom: 15px;
 }
 
-/* Right-side text group */
 .movie-info {
-    flex: 2;                  /* Take remaining space */
+    width: 100%;
 }
 
-/* Title styling */
 .movie-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: 0.3px;
-    color: #000;
+    margin-bottom: 10px;
 }
 
-/* Overview description */
 .movie-overview {
     font-size: 1rem;
     color: #222;
-    line-height: 1.35;
-    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 /* Release date text */
@@ -238,66 +189,68 @@ button:hover {
     color: #444;
 }
 
+/* Desktop: Horizontal card layout */
+@media (min-width: 768px) {
+    .movie-card-content {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .movie-info {
+        padding-left: 16px;
+    }
+
+    .movie-poster {
+        width: 250px;
+    }
+}
 
 /* ---------------------------------------------------------
-   ABOUT PAGE TEXT BLOCK
+   ABOUT PAGE - TEXT + BUTTONS 
 ----------------------------------------------------------*/
 .about-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
-    margin: 0 auto;
-    max-width: 800px;
-    color: #000;
     line-height: 1.7;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #000;
+    padding: 0 10px;
 }
 
-.about-page-buttons a {
-    margin-bottom: 12px !important;
-}
-
-
-/* ---------------------------------------------------------
-   ABOUT PAGE — Favorite Movie Buttons
-----------------------------------------------------------*/
 .about-movie-btn {
     font-family: 'Cinzel', serif;
     background-color: #e3e9e9;
     color: #000;
     padding: 12px 16px;
+    margin-bottom: 12px;
     border-radius: 10px;
-    font-weight: 600;
     text-align: center;
-    text-decoration: none;
     border: 2px solid transparent;
-    transition: 0.25s ease;
+    text-decoratin: none;
 }
 
 .about-movie-btn:hover {
     background-color: #d43d3d;
     color: #fff;
     border-color: #d43d3d;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
 }
 
-
 /* ------------------------------------------
-   MOBILE MENU OVERLAY (Modal Style)
+   MOBILE MENU MODAL
 -------------------------------------------*/
 .mobile-menu-overlay {
-    display: none; /* hidden at start */
+    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.65);
-    z-index: 9999;
-
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
-/* Menu content centered */
 .mobile-menu-content {
     background: #f2f3f3;
     padding: 30px;
@@ -308,14 +261,13 @@ button:hover {
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-/* Menu links */
 .mobile-menu-link {
     display: block;
     padding: 14px 0;
     margin: 6px 0;
     font-size: 1.2rem;
-    color: #333;
     font-weight: 700;
+    color: #333;
     text-decoration: none;
 }
 
@@ -323,54 +275,23 @@ button:hover {
     color: #d43d3d;
 }
 
-/* Close button */
 .mobile-close-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    border: none;
     background: #d43d3d;
     color: white;
-    font-weight: bold;
+    border: none;
     border-radius: 8px;
 }
 
-/* Hamburger button (MOBILE ONLY) */
-.hamburger-btn {
-    font-size: 2rem;
-    background: none;
-    border: none;
-    color: white;
-}
-
-
-/* ---------------------------------------------------------
-   ANIMATIONS — Fade-in for movie card on pick
-----------------------------------------------------------*/
-.fade-in {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fade 0.8s cubic-bezier(.21,.98,.6,1.02) forwards;
-}
-
-@keyframes fade {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* ---------------------------------------------------------
-   Guessing Game Modal (Correct / Wrong popup)
-----------------------------------------------------------*/
+/* =========================================================
+   GUESSING GAME MODAL
+   ========================================================= */
 .guess-modal {
-    display: none; /* hidden by default */
+    display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7); /* dark overlay */
+    inset: 0;
+    background: rgba(0,0,0,0.7);
     backdrop-filter: blur(4px);
     justify-content: center;
     align-items: center;
@@ -384,8 +305,7 @@ button:hover {
     max-width: 350px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    animation: modal-pop 0.4s ease forwards;
+    animation: modal-pop 0.4s ease;
 }
 
 .guess-modal-content img {
@@ -400,22 +320,22 @@ button:hover {
     padding: 10px 20px;
     border-radius: 8px;
     border: none;
-    font-weight: 600;
-    cursor: pointer;
 }
 
-.modal-close-btn:hover {
-    background: #b70f0f;
-}
-
-/* Modal animation */
 @keyframes modal-pop {
-    from {
-        transform: scale(0.7);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ---------------------------------------------------------
+   ANIMATIONS — Fade-in for movie card on pick
+----------------------------------------------------------*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fade 0.8s cubic-bezier(.21,.98,.6,1.02) forwards;
+}
+
+@keyframes fade {
+    to { opacity: 1; transform: translateY(0); }
 }
