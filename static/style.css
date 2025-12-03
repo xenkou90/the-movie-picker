@@ -415,3 +415,7 @@ body {
         align-items: center;
     }
 }
+
+.navbar .nav-link {
+    margin-left: 20px;
+}
