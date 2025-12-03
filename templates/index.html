@@ -104,8 +104,10 @@
                         <button type="submit" class="btn btn-light mb-3">Upload</button>
                     </form>
 
-                    {% if upload_message %}
+                    {% if upload_message is number %}
                         <p class="text-light mt-2">Houston, we have a CSV of {{ upload_message }} movies!</p>
+                    {% elif upload_message %}
+                        <p class="text-light mt-2 text-warning">{{ upload_message }}</p>
                     {% endif %}
 
                     {% if reset_message %}
