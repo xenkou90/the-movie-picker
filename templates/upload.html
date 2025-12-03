@@ -38,21 +38,21 @@
     <!-- MOBILE CSV UPLOAD CONTENT -->
     <div class="container d-flex flex-column align-items-center" style="padding-top: 60px;">
 
-        <h3 class="mb-4 text-center" style="color:#333;">Upload your Letterboxd CSV</h3>
+        <div class="upload-card">
 
-        <form method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center w-100" style="max-width: 300px;">
-            <input type="file" name="csv_file" class="form-control mb-3">
-            <button type="submit" class="btn btn-danger w-100">Upload</button>
-        </form>
+            <form method="POST" enctype="multipart/form-data" class="upload-section">
+                <input type="file" name="csv_file" class="form-control mb-3">
+                <button type="submit" class="btn btn-danger w-100">Upload CSV</button>
+            </form>
 
-        {% if upload_message %}
-            <p class="mt-3 text-success text-center">{{ upload_message }} movies!</p>
-        {% endif %}
+            {% if upload_message %}
+                <p class="mt-3 text-success text-center">{{ upload_message }} movies!</p>
+            {% endif %}
 
-        <form method="POST" action="/reset" class="mt-3 w-100" style="max-width: 300px;">
-            <button class="btn btn-danger w-100">Reset CSV</button>
-        </form>
-
+            <form method="POST" action="/reset" class="reset-section mt-3">
+                <button class="btn btn-light w-100 reset-btn-mobile">Reset CSV</button>
+            </form>
+        </div>
     </div>
 
     <!-- MOBILE MENU -->
