@@ -261,9 +261,14 @@ def index():
                 # Add to DB
                 add_watched_movies(movies_to_add)
 
-                upload_message = f"Uploaded {len(movies_to_add)} movies!"
+                upload_message = len(movies_to_add)
+
+                # Clear RESET message if CSV is uploaded
+                reset_message = None
+
             else:
                 upload_message = "Please upload a valid CSV file"
+                reset_message = None
 
 
 
