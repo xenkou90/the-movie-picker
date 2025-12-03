@@ -97,28 +97,30 @@
                 <!-- RIGHT SIDE (DESKTOP ONLY) -->
                 <div class="col-12 col-md-6 right-side d-none d-md-flex flex-column align-items-center pt-5 pb-5">
 
-                    <h3 class="text-white mb-4">Go for Pick for Me! or toss in your CSV and I will reveal what you have not seen.</h3>
+                    <div class="upload-card-desktop">
+                        <h4 class="upload-title-desktop text-center">
+                            Go for Pick for Me! or toss in your CSV and I will reveal what you have not seen.
+                        </h4>
 
-                    <form method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
-                        <input type="file" name="csv_file" class="form-control mb-3" style="width: 250px">
-                        <button type="submit" class="btn btn-light mb-3">Upload</button>
-                    </form>
+                        <form method="POST" enctype="multipart/form-data" class="w-100">
+                            <input type="file" name="csv_file" class="form-control mb-3 upload-input-desktop">
+                            <button type="submit" class="btn btn-danger w-100 upload-btn-desktop">Upload CSV</button>
+                        </form>
 
-                    {% if upload_message is number %}
-                        <p class="text-light mt-2">Houston, we have a CSV of {{ upload_message }} movies!</p>
-                    {% elif upload_message %}
-                        <p class="text-light mt-2 text-warning">{{ upload_message }}</p>
-                    {% endif %}
+                        {% if upload_message is number %}
+                            <p class="upload-success-desktop">
+                                Houston, we have a CSV of {{ upload_message }} movies!
+                            </p>
+                        {% elif upload_message %}
+                            <p class="upload-error-desktop">{{ upload_message }}</p>
+                        {% endif %}
 
-                    {% if reset_message %}
-                        <p class="text-light mt-2">Watchlist cleared</p>
-                    {% endif %}
+                        <p class="watched-count-desktop">Watched movies: {{ watched_count }}</p>
 
-                    <p class="text-light mt-2">Watched movies: {{ watched_count }}</p>
-
-                    <form method="POST" action="/reset" class="mt-3">
-                        <button class="btn btn-danger">Reset CSV</button>
-                    </form>
+                        <form method="POST" action="/reset" class="w-100 mt-2">
+                            <button class="btn btn-light w-100 reset-btn-desktop">Reset CSV</button>
+                        </form>
+                    </div>
 
                 </div> <!-- END RIGHT SIDE -->
 

@@ -296,7 +296,7 @@ body {
 
 
 /* ---------------------------------------------------------
-   UPLOAD PAGE — MOBILE CARD
+   UPLOAD CARD — MOBILE VERSION
 ----------------------------------------------------------*/
 .upload-card {
     background: white;
@@ -322,6 +322,67 @@ body {
     height: 48px;
 }
 
+.upload-subtitle {
+    color: #444;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+
+/* ---------------------------------------------------------
+   UPLOAD CARD — DESKTOP VERSION
+----------------------------------------------------------*/
+.upload-card-desktop {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-title-desktop {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.upload-input-desktop {
+    max-width: 100%;
+}
+
+.upload-btn-desktop,
+.reset-btn-desktop {
+    height: 48px;
+    border-radius: 12px;
+    font-weight: 800;
+}
+
+.upload-success-desktop {
+    color: #28a745;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.upload-error-desktop {
+    color: #b60f0f;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.watched-count-desktop {
+    color: #444;
+    margin-top: 10px;
+    text-align: center;
+}
 
 /* ---------------------------------------------------------
    DESKTOP OVERRIDES (min-width: 768px)
