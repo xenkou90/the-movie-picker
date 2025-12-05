@@ -116,16 +116,20 @@ def get_all_movies():
         params["language"] = "en-US"
         params["page"] = 1  # Only first page needed because we use many variations
 
-        response = requests.get(base_url, params=params)
-
-        if response.status_code != 200:
-            print("TMDB Discover error:", response.text)
+        try:
+            response = requests.get(base_url, params=params, timeout=5)
+            response.raise_for_status()
+        except Exception as e:
+            print("TMDB Discover error:", e)
             continue
 
-        results = response.json().get("results", [])
+        data = response.json()
+        results = data.get("results", [])
 
         for m in results:
-            movie_id = m["id"]
+            movie_id = m.get("id")
+            if not movie_id:
+                continue
 
             # Skip duplicates
             if movie_id in movie_ids:
@@ -133,13 +137,18 @@ def get_all_movies():
 
             movie_ids.add(movie_id)
 
+            title = m.get("title") or "Untitled"
+            overview = m.get("overview") or "No description available."
+            poster_path = m.get("poster_path")
+            release_date = m.get("release_date") or "N/A"
+
             movies.append({
-                "title": m["title"],
-                "overview": m["overview"],
-                "poster": f"https://image.tmdb.org/t/p/w500{m['poster_path']}" if m["poster_path"] else None,
-                "release_date": m["release_date"] if m["release_date"] else "N/A",
+                "title": title,
+                "overview": overview,
+                "poster": f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None,
+                "release_date": release_date
             })
-            
+
     # Save to cache
     cached_movies = movies
     cached_timestamp = time.time()
