@@ -58,6 +58,9 @@ body {
     .navbar-collapse {
         display: none !important;
     }
+    .guess-prompt-mobile {
+        color: #444;
+    }
 }
 
 /* ---------------------------------------------------------
