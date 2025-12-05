@@ -139,6 +139,7 @@ def get_all_movies():
                 "poster": f"https://image.tmdb.org/t/p/w500{m['poster_path']}" if m["poster_path"] else None,
                 "release_date": m["release_date"] if m["release_date"] else "N/A",
             })
+            
     # Save to cache
     cached_movies = movies
     cached_timestamp = time.time()
@@ -236,40 +237,52 @@ def index():
         if "csv_file" in request.files:
             file = request.files.get("csv_file")
 
-            if file and file.filename.endswith(".csv"):
+            # Nothing selected
+            if not file or file.filename == "":
+                upload_message = "Please select a CSV file to upload"
+                reset_message = None
 
-                # Read CSV content
-                text = file.read().decode("utf-8")
-                csv_reader = csv.DictReader(io.StringIO(text))
-
-                movies_to_add = []
-
-                # Extract title + year per row
-                for row in csv_reader:
-                    title = row.get("Name")
-                    year = row.get("Year")
-
-                    # Convert year to int safely
-                    try:
-                        year = int(year)
-                    except:
-                        year = None
-
-                    if title:
-                        movies_to_add.append((title, year))
-
-                # Add to DB
-                add_watched_movies(movies_to_add)
-
-                upload_message = len(movies_to_add)
-
-                # Clear RESET message if CSV is uploaded
+            # Not a CSV file
+            elif not file.filename.lower().endswith(".csv"):
+                upload_message = "Please upload a .csv file"
                 reset_message = None
 
             else:
-                upload_message = "Please upload a valid CSV file"
-                reset_message = None
+                try:
+                    text = file.read().decode("utf-8")
+                except UnicodeDecodeError:
+                    upload_message = "Could not read the file. Please make sure it is a valid UTF-8 encoded CSV."
+                    reset_message = None
+                else:
+                    csv_reader = csv.DictReader(io.StringIO(text))
 
+                    # Check expected headers
+                    if not csv_reader.fieldnames or "Name" not in csv_reader.fieldnames:
+                        upload_message = "This doesn't look like a valid CSV. Make sure it has a 'Name' column."
+                        reset_message = None
+                    else:
+                        movies_to_add = []
+
+                        for row in csv_reader:
+                            title = row.get("Name")
+                            year = row.get("Year")
+
+                            if not title:
+                                continue # Skip rows without a title
+
+                            try:
+                                year = int(year) if year else None
+                            except ValueError:
+                                year = None
+
+                            movies_to_add.append((title, year))
+
+                        if movies_to_add:
+                            add_watched_movies(movies_to_add)
+                            upload_message = len(movies_to_add)
+                        else:
+                            upload_message = "No valid movie entries found in the CSV."
+                        reset_message = None
 
 
         # ----------------------------------------------------
