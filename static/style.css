@@ -126,6 +126,21 @@ body {
     box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
 
+.movie-poster-placeholder {
+    width: 220px;
+    height: 330px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    background: #c2c7cc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+}
+
 .movie-title {
     font-size: 1.4rem;
     font-weight: 700;
