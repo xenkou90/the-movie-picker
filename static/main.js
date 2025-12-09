@@ -71,23 +71,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // COPY MOVIE TO CLIPBOARD + TOAST
+    // COPY MOVIE TITLE TO CLIPBOARD + TOAST
     // =========================================================
     const copyBtn = document.getElementById("copy-btn");
-    const copyStatus = document.getElementById("copy-toast");
+    const toast = document.getElementById("copy-toast");
 
-    if (copyBtn) {
+    if (copyBtn && toast) {
         copyBtn.addEventListener("click", () => {
             const title = document.querySelector(".movie-title")?.textContent || "";
 
+            if (!title) return;
+
             navigator.clipboard.writeText(title).then(() => {
                 // Show toast
-                TransformStream.classList.add("show");
+                toast.classList.add("show");
 
                 // Hide toast after 1.4 sec
                 setTimeout(() => {
-                    TransformStream.classList.remove("show");
+                    toast.classList.remove("show");
                 }, 1400);
+            }).catch(err => {
+                console.error("Clipboard error:", err);
             });
         });
     }
