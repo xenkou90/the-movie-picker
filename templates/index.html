@@ -115,6 +115,28 @@
                                     <strong>TMDB Rating:</strong> ⭐ {{ "%.1f"|format(picked_movie.rating) }}
                                 </p>
                                 {% endif %}
+
+                                <!-- External links (IMDB+LETTERBOXD) -->
+                                <div class="external-links">
+
+                                    {% if picked_movie.imdb_id %}
+                                    <a href="https://www.imdb.com/title/{{ picked_movie.imdb_id }}/"
+                                    target="_blank"
+                                    class="external-btn"
+                                    title="View on IMDb">
+                                        IMDb
+                                    </a>
+                                    {% endif %}
+
+                                    {% if picked_movie.tmdb_id %}
+                                    <a href="https://letterboxd.com/tmdb/{{ picked_movie.tmdb_id }}/"
+                                    target="_blank"
+                                    class="external-btn"
+                                    title="View on Letterboxd">
+                                        Letterboxd
+                                    </a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 

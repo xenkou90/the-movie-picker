@@ -221,6 +221,34 @@ body {
     color: #A78BFA;
 }
 
+
+/* ---------------------------------------------------------
+   EXTERNAL LINKS
+----------------------------------------------------------*/
+.external-links {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.external-btn {
+    background: #A78BFA;
+    color: #000;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.external-btn:hover {
+    background: #C4B5FD;
+    color: #000;
+    text-decoration: none;
+}
+
+
 /* ---------------------------------------------------------
    BUTTONS
 ----------------------------------------------------------*/
