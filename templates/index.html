@@ -94,6 +94,25 @@
                                         N/A
                                     {% endif %}
                                 </p>
+
+                                <!-- GENRE - RUNTIME - RATING -->
+                                {% if picked_movie.genres %}
+                                <p class="movie-extra">
+                                    <strong>Genres:</strong> {{ picked_movie.genres | join(', ') }}
+                                </p>
+                                {% endif %}
+
+                                {% if picked_movie.runtime %}
+                                <p class="movie-extra">
+                                    <strong>Runtime:</strong> {{ picked_movie.runtime }} min
+                                </p>
+                                {% endif %}
+
+                                {% if picked_movie.rating %}
+                                <p class="movie-extra">
+                                    <strong>TMDB Rating:</strong> ⭐ {{ "%.1f"|format(picked_movie.rating) }}
+                                </p>
+                                {% endif %}
                             </div>
                         </div>
 

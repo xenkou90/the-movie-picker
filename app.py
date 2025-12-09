@@ -141,12 +141,17 @@ def get_all_movies():
             overview = m.get("overview") or "No description available."
             poster_path = m.get("poster_path")
             release_date = m.get("release_date") or "N/A"
+            
+            details = get_movie_details(movie_id)
 
             movies.append({
-                "title": title,
-                "overview": overview,
-                "poster": f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None,
-                "release_date": release_date
+                "title": m["title"],
+                "overview": m["overview"],
+                "poster": f"https://image.tmdb.org/t/p/w500{poster_path}" if m["poster_path"] else None,
+                "release_date": m["release_date"] if m["release_date"] else "N/A",
+                "genres": details["genres"] if details else [],
+                "runtime":details["runtime"] if details else None,
+                "rating": details["vote_average"] if details else None,
             })
 
     # Save to cache
@@ -213,6 +218,24 @@ def reset_watched_movies():
     conn.commit()
     conn.close()
 
+def get_movie_details(movie_id):
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}"
+    params = {
+        "api_key": TMDB_API_KEY,
+        "language": "en-US"
+    }
+
+    response = requests.get(url, params=params)
+    if response.status_code != 200:
+        return None
+    
+    data = response.json()
+
+    return {
+        "genres": [g["name"] for g in data.get("genres", [])],
+        "runtime": data.get("runtime"),
+        "vote_average": data.get("vote_average")
+    }
 
 
 # ------------------------------------------------------------
