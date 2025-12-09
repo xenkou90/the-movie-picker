@@ -164,6 +164,8 @@ def get_all_movies():
                 "genres": details["genres"] if details else [],
                 "runtime":details["runtime"] if details else None,
                 "rating": details["vote_average"] if details else None,
+                "tmdb_id": movie_id,
+                "imdb_id": details.get("imdb_id") if details else None
             })
 
     # Save to cache
@@ -237,8 +239,11 @@ def get_movie_details(movie_id):
         "language": "en-US"
     }
 
-    response = requests.get(url, params=params)
-    if response.status_code != 200:
+    try:
+        response = requests.get(url, params=params, timeout=5)
+        response.raise_for_status()
+    except Exception as e:
+        print("TMDB details error:", e)
         return None
     
     data = response.json()
@@ -246,7 +251,8 @@ def get_movie_details(movie_id):
     return {
         "genres": [g["name"] for g in data.get("genres", [])],
         "runtime": data.get("runtime"),
-        "vote_average": data.get("vote_average")
+        "vote_average": data.get("vote_average"),
+        "imdb_id": data.get("imdb_id")
     }
 
 
