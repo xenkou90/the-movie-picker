@@ -4,27 +4,30 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // =========================================================
-    // 1. MOBILE MENU (Works on all pages)
+    // LAVENDER CYBERPUNK HAMBURGER TOGGLE
     // =========================================================
-    const hamburger = document.getElementById("hamburger-btn");
+    const hamb = document.getElementById("hamburger-btn");
     const mobileMenu = document.getElementById("mobile-menu");
-    const mobileClose = document.getElementById("mobile-menu-close");
 
-    if (hamburger && mobileMenu) {
-        hamburger.addEventListener("click", () => {
+    if (hamb && mobileMenu) {
+        hamb.addEventListener("click", () => {
+            hamb.classList.toggle("active");
             mobileMenu.style.display = "flex";
         });
     }
 
+    const mobileClose = document.getElementById("mobile-menu-close");
+
     if (mobileClose) {
         mobileClose.addEventListener("click", () => {
             mobileMenu.style.display = "none";
+            hamb.classList.remove("active");
         });
     }
 
 
     // =========================================================
-    // 2. GUESSING GAME (Only runs on About + Guess pages)
+    // GUESSING GAME (Only runs on About + Guess pages)
     // =========================================================
     const guessInput = document.getElementById("guess-input");
     const guessButton = document.getElementById("guess-btn");

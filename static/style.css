@@ -103,6 +103,52 @@ body {
     display: none; /* hidden on mobile */
 }
 
+
+/* ==========================================================
+   ANIMATED HAMBURGER → X
+   ========================================================== */
+.hamburger-animated {
+    width: 34px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2000;
+}
+
+/* Each Bar */
+.hamburger-animated span {
+    height: 6px;
+    background: #200472;
+    border-radius: 3px;
+    box-shadow: 0 0 3px #200472;
+}
+
+/* Hover effect = stronger neon pulse */
+.hamburger-animated:hover span {
+    box-shadow: 0 0 12px #C8B4FF;
+}
+
+/* When menu is open -> transform into an X */
+.hamburger-animated.active span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+    box-shadow: 0 0 12px #C8B4FF;
+}
+
+.hamburger-animated.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-animated.active span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+    box-shadow: 0 0 12px #C8B4FF;
+}
+
+
 /* ---------------------------------------------------------
    MOVIE CARD — MOBILE FIRST
 ----------------------------------------------------------*/
