@@ -75,12 +75,14 @@ cached_timestamp = None
 # This increases variety compared to the standard 'popular' endpoint.
 # We fetch: 1. Most popular movies 2. Highest rated movies 3. Movies with high vote counts 4. Movies from random years 
 import time
+from datetime import datetime
+import random
 
 def get_all_movies():
 
     global cached_movies, cached_timestamp
 
-    # If cache exists and is not older than 6 hours -> use it
+    # Use cached movies if not older than 6 hours
     if cached_movies and cached_timestamp:
         if time.time() - cached_timestamp < 6 * 3600:
             return cached_movies
@@ -91,34 +93,43 @@ def get_all_movies():
 
     base_url = "https://api.themoviedb.org/3/discover/movie"
 
-    from datetime import datetime
     today = datetime.today().strftime("%Y-%m-%d")
 
-    # Different Discover configurations (more variety)
+    # Common filters applied to ALL discover requests
+    common_filters = {
+        "release_date.lte": today,
+        "vote_count.gte": 1000,
+        "with_runtime.gte": 40,
+        "with_poster": "true",
+    }
+
+    # Main discover configurations
     discover_sets = [
-        {"sort_by": "popularity.desc", "release_date.lte": today},
-        {"sort_by": "vote_average.desc", "vote_count.gte": 500, "release_date.lte": today},
-        {"sort_by": "vote_count.desc", "release_date.lte": today},
-        {"sort_by": "release_date.desc", "release_date.lte": today},
+        {"sort_by": "popularity.desc", **common_filters},
+        {"sort_by": "vote_average.desc", **common_filters},
+        {"sort_by": "vote_count.desc", **common_filters},
+        {"sort_by": "release_date.desc", **common_filters},
     ]
 
-    # Add RANDOM YEARS for even more variety
-    import random
+    # Random year discover pulls (adds variety)
     random_years = random.sample(range(1980, 2024), 5)  # 5 random years
 
     for year in random_years:
         discover_sets.append({
             "primary_release_year": year,
             "sort_by": "popularity.desc",
-            "release_date.lte": today
+            **common_filters
         })
 
-    # Fetch movies from all configurations
+    # Fetch movies for each discover configuration
     for params in discover_sets:
+
         # Required API params
-        params["api_key"] = TMDB_API_KEY
-        params["language"] = "en-US"
-        params["page"] = 1  # Only first page needed because we use many variations
+        params.update({
+            "api_key": TMDB_API_KEY,
+            "language": "en-US",
+            "page": 1
+        })
 
         try:
             response = requests.get(base_url, params=params, timeout=5)
@@ -127,8 +138,7 @@ def get_all_movies():
             print("TMDB Discover error:", e)
             continue
 
-        data = response.json()
-        results = data.get("results", [])
+        results = response.json().get("results", [])
 
         for m in results:
             movie_id = m.get("id")
@@ -141,18 +151,16 @@ def get_all_movies():
 
             movie_ids.add(movie_id)
 
-            title = m.get("title") or "Untitled"
-            overview = m.get("overview") or "No description available."
             poster_path = m.get("poster_path")
-            release_date = m.get("release_date") or "N/A"
             
+            # Fetch detailed info (genres, tuntime, rating)
             details = get_movie_details(movie_id)
 
             movies.append({
-                "title": m["title"],
-                "overview": m["overview"],
-                "poster": f"https://image.tmdb.org/t/p/w500{poster_path}" if m["poster_path"] else None,
-                "release_date": m["release_date"] if m["release_date"] else "N/A",
+                "title": m.get("title") or "Untitled",
+                "overview": m.get("overview") or "No description available.",
+                "poster": f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None,
+                "release_date": m.get("release_date") or "N/A",
                 "genres": details["genres"] if details else [],
                 "runtime":details["runtime"] if details else None,
                 "rating": details["vote_average"] if details else None,
