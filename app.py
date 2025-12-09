@@ -91,12 +91,15 @@ def get_all_movies():
 
     base_url = "https://api.themoviedb.org/3/discover/movie"
 
+    from datetime import datetime
+    today = datetime.today().strftime("%Y-%m-%d")
+
     # Different Discover configurations (more variety)
     discover_sets = [
-        {"sort_by": "popularity.desc"},
-        {"sort_by": "vote_average.desc", "vote_count.gte": 500},
-        {"sort_by": "vote_count.desc"},
-        {"sort_by": "release_date.desc"},
+        {"sort_by": "popularity.desc", "release_date.lte": today},
+        {"sort_by": "vote_average.desc", "vote_count.gte": 500, "release_date.lte": today},
+        {"sort_by": "vote_count.desc", "release_date.lte": today},
+        {"sort_by": "release_date.desc", "release_date.lte": today},
     ]
 
     # Add RANDOM YEARS for even more variety
@@ -106,7 +109,8 @@ def get_all_movies():
     for year in random_years:
         discover_sets.append({
             "primary_release_year": year,
-            "sort_by": "popularity.desc"
+            "sort_by": "popularity.desc",
+            "release_date.lte": today
         })
 
     # Fetch movies from all configurations
