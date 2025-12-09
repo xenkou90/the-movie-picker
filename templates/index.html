@@ -119,6 +119,8 @@
                         {% else %}
                         <p>No movie selected yet.</p>
                         {% endif %}
+
+                        <button id="copy-btn" class="copy-btn">Copy movie title</button>
                      </div>
 
                 </div> <!-- END LEFT SIDE -->
@@ -174,6 +176,8 @@
 
             </div>
         </div>
+
+        <div id="copy-toast" class="copy-toast">Copied to clipboard</div>
 
         <!-- JS -->
         <script src="{{ url_for('static', filename='main.js') }}"></script>

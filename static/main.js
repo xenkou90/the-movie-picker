@@ -68,4 +68,27 @@ document.addEventListener("DOMContentLoaded", () => {
             guessModal.style.display = "none";
         });
     }
+
+
+    // =========================================================
+    // COPY MOVIE TO CLIPBOARD + TOAST
+    // =========================================================
+    const copyBtn = document.getElementById("copy-btn");
+    const copyStatus = document.getElementById("copy-toast");
+
+    if (copyBtn) {
+        copyBtn.addEventListener("click", () => {
+            const title = document.querySelector(".movie-title")?.textContent || "";
+
+            navigator.clipboard.writeText(title).then(() => {
+                // Show toast
+                TransformStream.classList.add("show");
+
+                // Hide toast after 1.4 sec
+                setTimeout(() => {
+                    TransformStream.classList.remove("show");
+                }, 1400);
+            });
+        });
+    }
 });
