@@ -74,28 +74,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // COPY MOVIE TITLE TO CLIPBOARD + TOAST
+    // COPY MOVIE TITLE TO CLIPBOARD + TOOLTIP
     // =========================================================
     const copyBtn = document.getElementById("copy-btn");
-    const toast = document.getElementById("copy-toast");
+    const titleTextEl = document.querySelector(".movie-title");
+    const titleText = titleTextEl ? titleTextEl.innerText.trim() : "";
 
-    if (copyBtn && toast) {
+    if (copyBtn) {
         copyBtn.addEventListener("click", () => {
-            const title = document.querySelector(".movie-title")?.textContent || "";
 
-            if (!title) return;
+            navigator.clipboard.writeText(titleText).then(() => {
+                copyBtn.classList.add("show-tooltip");
 
-            navigator.clipboard.writeText(title).then(() => {
-                // Show toast
-                toast.classList.add("show");
-
-                // Hide toast after 1.4 sec
                 setTimeout(() => {
-                    toast.classList.remove("show");
-                }, 1400);
-            }).catch(err => {
-                console.error("Clipboard error:", err);
+                    copyBtn.classList.remove("show-tooltip");
+                }, 900);
             });
         });
     }
-});

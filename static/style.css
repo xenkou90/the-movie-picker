@@ -223,31 +223,35 @@ body {
 
 
 /* ---------------------------------------------------------
-   EXTERNAL LINKS
+   EXTERNAL LINKS + BUTTONS
 ----------------------------------------------------------*/
 .external-links {
     display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-top: 12px;
-    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
 }
 
-.external-btn {
+.external-btn,
+.copy-inline-btn {
     background: #A78BFA;
     color: #000;
-    padding: 8px 14px;
-    border-radius: 8px;
+    padding: 6px 14px;
+    border-radius: 10px;
     font-weight: 700;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: 0.2s ease;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+    position: relative; 
 }
 
-.external-btn:hover {
-    background: #C4B5FD;
-    color: #000;
-    text-decoration: none;
+.external-btn:hover,
+.copy-inline-btn:hover {
+    box-shadow: 0 0 8px #A78BFA;
+    transform: translateY(-2px);
+    text-decoration: none !important;
 }
 
 
@@ -302,26 +306,35 @@ body {
     background: #c7b5ff;
 }
 
-.copy-toast {
-    position: fixed;
-    bottom: 28px;
+
+/* ---------------------------------------------------------
+   CUSTOM TOOLTIP for Copy button
+----------------------------------------------------------*/
+.copy-inline-btn:hover::after {
+    content: "Copy title";
+    position: absolute;
+    bottom: -28px;
     left: 50%;
     transform: translateX(-50%);
-    background: #A78BFA;
-    color: #000;
-    padding: 6px 16px;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    opacity: 0;
+    background: #222;
+    color: #eee;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 1;
     pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 99999;
 }
 
-.copy-toast.show {
-    opacity: 1;
+.copy-inline-btn::after {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
 }
+
+.copy-inline-btn:hover::after {
+    box-shadow: 0 0 6px rgba(167, 139, 250, 0.7);
+}
+
 
 /* ---------------------------------------------------------
    ABOUT PAGE — MOBILE FIRST
