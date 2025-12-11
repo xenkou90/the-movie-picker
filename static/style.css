@@ -226,9 +226,11 @@ body {
    EXTERNAL LINKS
 ----------------------------------------------------------*/
 .external-links {
-    margin-top: 12px;
     display: flex;
+    justify-content: center;
     gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
 }
 
 .external-btn {
@@ -287,14 +289,12 @@ body {
 }
 
 .copy-btn {
-    margin-top: 12px;
-    background: #A78BFA;
+    background: #a78bfa;
     color: #000;
     border: none;
-    padding: 8px 14px;
-    border-radius: 10px;
+    padding: 10px 16px;
     font-weight: 700;
-    font-size: 0.9rem;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -596,6 +596,14 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .external-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
     }
 }
 
