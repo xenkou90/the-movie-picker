@@ -111,7 +111,7 @@ def get_all_movies():
         {"sort_by": "release_date.desc", **common_filters},
     ]
 
-    # Random year discover pulls (adds variety)
+    # Add 5 random years for variety
     random_years = random.sample(range(1980, 2024), 5)  # 5 random years
 
     for year in random_years:
@@ -142,30 +142,21 @@ def get_all_movies():
 
         for m in results:
             movie_id = m.get("id")
-            if not movie_id:
-                continue
-
-            # Skip duplicates
-            if movie_id in movie_ids:
-                continue
+            if not movie_id or movie_id in movie_ids:
+                continue  # Skip duplicates
 
             movie_ids.add(movie_id)
 
             poster_path = m.get("poster_path")
             
-            # Fetch detailed info (genres, tuntime, rating)
-            details = get_movie_details(movie_id)
-
+            # ONLY basic info — NO details yet
             movies.append({
+                "tmdb_id": movie_id,
                 "title": m.get("title") or "Untitled",
                 "overview": m.get("overview") or "No description available.",
                 "poster": f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None,
                 "release_date": m.get("release_date") or "N/A",
-                "genres": details["genres"] if details else [],
-                "runtime":details["runtime"] if details else None,
-                "rating": details["vote_average"] if details else None,
-                "tmdb_id": movie_id,
-                "imdb_id": details.get("imdb_id") if details else None
+                "rating": m.get("vote_average"),
             })
 
     # Save to cache
@@ -351,8 +342,20 @@ def index():
 
             # Randomly choose a movie if available
             if unwatched:
-                import random
                 picked_movie = random.choice(unwatched)
+
+                # Fetch DETAILS ONLY NOW
+                details = get_movie_details(picked_movie["tmdb_id"])
+
+                if details:
+                    picked_movie["genres"] = details["genres"]
+                    picked_movie["runtime"] = details["runtime"]
+                    picked_movie["imdb_id"] = details.get("imdb_id")
+                else:
+                    picked_movie["genres"] = []
+                    picked_movie["runtime"] = None
+                    picked_movie["imdb_id"] = None
+
             else:
                 picked_movie = None
                 upload_message = "You've watched all available movies!"
