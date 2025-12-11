@@ -1,9 +1,19 @@
-/* ---------------------------------------------------------
+/* ==========================================================
    GLOBAL DESIGN SYSTEM — MOBILE FIRST
-----------------------------------------------------------*/
+   ========================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* Colors
+   ---------------------------------------------------------
+   Background:      #121212
+   Card:            #1E1E1E
+   Text main:       #E4E4E4
+   Text muted:      #BEBEBE / #D4D4D4
+   Lavender main:   #A78BFA
+   Lavender light:  #C4B5FD
+----------------------------------------------------------*/
 
 * {
     margin: 0;
@@ -24,9 +34,9 @@ body {
     flex-direction: column;
 }
 
-/* ---------------------------------------------------------
-   NAVBAR — MOBILE FIRST
-----------------------------------------------------------*/
+/* ==========================================================
+   NAVBAR
+   ========================================================== */
 .top-bar {
     background-color: #A78BFA;
     height: 70px;
@@ -46,66 +56,20 @@ body {
     text-shadow: 0 0 8px rgba(196,181,253,0.9);
 }
 
-.hamburger-btn {
-    font-size: 2rem;
-    color: #ffffff;
-    background: none;
-    border: none;
+.navbar .nav-link {
+    margin-left: 20px;
 }
 
-/* Hide desktop links on mobile + mobile guess prompt color */
+/* Hide desktop links on mobile */
 @media (max-width: 768px) {
     .navbar-collapse {
         display: none !important;
     }
-    .guess-prompt-mobile {
-        color: #BEBEBE;
-    }
-}
-
-/* ---------------------------------------------------------
-   MAIN LAYOUT (MOBILE FIRST)
-----------------------------------------------------------*/
-.main-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.main-container .row {
-    flex: 1;
-    min-height: calc(100vh - 70px);
-}
-
-/* ---------------------------------------------------------
-   LEFT SIDE (mobile)
-----------------------------------------------------------*/
-.left-side {
-    background-color: #121212;
-    padding: 40px 20px;
-    min-height: calc(100vh - 70px);
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-/* ---------------------------------------------------------
-   RIGHT SIDE (desktop only)
-----------------------------------------------------------*/
-.right-side {
-    background-color: #121212;
-    color: #E4E4E4;
-    padding: 60px 20px;
-
-    display: none; /* hidden on mobile */
 }
 
 
 /* ==========================================================
-   ANIMATED HAMBURGER → X
+   ANIMATED NEON HAMBURGER (→ X)
    ========================================================== */
 .hamburger-animated {
     width: 34px;
@@ -120,20 +84,20 @@ body {
     z-index: 2000;
 }
 
-/* Each Bar */
+/* Bars */
 .hamburger-animated span {
     height: 6px;
-    background: #200472;
     border-radius: 3px;
-    box-shadow: 0 0 3px #200472;
+    background: #200472;
+    box-shadow: 0 0 4px #200472;
 }
 
-/* Hover effect = stronger neon pulse */
+/* Hover pulse */
 .hamburger-animated:hover span {
     box-shadow: 0 0 12px #C8B4FF;
 }
 
-/* When menu is open -> transform into an X */
+/* Active → X */
 .hamburger-animated.active span:nth-child(1) {
     transform: translateY(11px) rotate(45deg);
     box-shadow: 0 0 12px #C8B4FF;
@@ -149,9 +113,47 @@ body {
 }
 
 
-/* ---------------------------------------------------------
-   MOVIE CARD — MOBILE FIRST
-----------------------------------------------------------*/
+/* ==========================================================
+   MAIN LAYOUT
+   ========================================================== */
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container .row {
+    flex: 1;
+    min-height: calc(100vh - 70px);
+}
+
+
+/* LEFT SIDE (always visible, mobile-first) */
+.left-side {
+    background-color: #121212;
+    padding: 40px 20px;
+    min-height: calc(100vh - 70px);
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+/* RIGHT SIDE (desktop only) */
+.right-side {
+    background-color: #121212;
+    color: #E4E4E4;
+    padding: 60px 20px;
+    display: none; 
+}
+
+
+/* ==========================================================
+   MOVIE CARD
+   ========================================================== */
 .movie-card {
     width: 90%;
     background-color: #1E1E1E;
@@ -168,13 +170,14 @@ body {
     text-align: center;
 }
 
-/* Poster with medium lavender spotlight */
+/* Poster with spotlight + shadow */
 .movie-poster {
     width: 220px;
     border-radius: 12px;
     margin-bottom: 12px;
-        0 0 40px 12px rgba(167,139,250,0.45),  /* spotlight glow */
-        0 6px 18px rgba(0,0,0,0.6);            /* drop shadow */
+    box-shadow:
+        0 0 40px 12px rgba(167,139,250,0.45),
+        0 6px 18px rgba(0,0,0,0.6);
 }
 
 .movie-poster-placeholder {
@@ -222,42 +225,10 @@ body {
 }
 
 
-/* ---------------------------------------------------------
-   EXTERNAL LINKS + BUTTONS
-----------------------------------------------------------*/
-.external-links {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 15px;
-}
 
-.external-btn,
-.copy-inline-btn {
-    background: #A78BFA;
-    color: #000;
-    padding: 6px 14px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    border: none;
-    cursor: pointer;
-    text-decoration: none !important;
-    transition: all 0.25s ease;
-    position: relative; 
-}
-
-.external-btn:hover,
-.copy-inline-btn:hover {
-    box-shadow: 0 0 8px #A78BFA;
-    transform: translateY(-2px);
-    text-decoration: none !important;
-}
-
-
-/* ---------------------------------------------------------
-   BUTTONS
-----------------------------------------------------------*/
+/* ==========================================================
+   PRIMARY BUTTONS (Pick, Upload, Reset)
+   ========================================================== */
 .pick-btn,
 .btn-danger {
     background-color: #A78BFA;
@@ -292,28 +263,52 @@ body {
     color: #E4E4E4 !important;
 }
 
+
+/* ==========================================================
+   MOVIE CARD EXTERNAL BUTTONS (IMDb, LETTERBOXD, COPY MOVIE TITLE)
+   ========================================================== */
+.external-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.external-btn,
+.copy-inline-btn,
 .copy-btn {
-    background: #a78bfa;
+    background: #A78BFA;
     color: #000;
-    border: none;
-    padding: 10px 16px;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-weight: 700;
-    border-radius: 10px;
+    font-size: 0.8rem;
+    border: none;
     cursor: pointer;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    position: relative; 
+    transition: all 0.25s ease;
 }
 
+.external-btn:hover,
+.copy-inline-btn:hover,
 .copy-btn:hover {
-    background: #c7b5ff;
+    box-shadow: 0 0 10px #A78BFA, 0 0 18px #A78BFA;
+    transform: translateY(-2px);
+    text-decoration: none !important;
 }
 
-
-/* ---------------------------------------------------------
-   CUSTOM TOOLTIP for Copy button
-----------------------------------------------------------*/
-.copy-inline-btn:hover::after {
-    content: "Copy title";
+/* Tooltip for Copy button (triggered via .show-tooltip class from JS) */
+.copy-inline-btn::after {
+    content: "Copied!";
     position: absolute;
-    bottom: -28px;
+    bottom: -26px;
     left: 50%;
     transform: translateX(-50%);
     background: #222;
@@ -322,23 +317,20 @@ body {
     border-radius: 6px;
     font-size: 0.7rem;
     white-space: nowrap;
-    opacity: 1;
-    pointer-events: none;
-}
-
-.copy-inline-btn::after {
     opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 0 6px rgba(167, 139, 250, 0.7);
     transition: opacity 0.2s ease-in-out;
 }
 
-.copy-inline-btn:hover::after {
-    box-shadow: 0 0 6px rgba(167, 139, 250, 0.7);
+.copy-inline-btn.show-tooltip::after {
+    opacity: 1;
 }
 
 
-/* ---------------------------------------------------------
-   ABOUT PAGE — MOBILE FIRST
-----------------------------------------------------------*/
+/* ==========================================================
+   ABOUT PAGE TEXT + FAVORITE MOVIE BUTTONS
+   ========================================================== */
 .about-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.05rem;
@@ -371,56 +363,15 @@ body {
     color: #121212;
 }
 
-/* ---------------------------------------------------------
-   MOBILE MENU OVERLAY
-----------------------------------------------------------*/
-.mobile-menu-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 9999;
-
-    justify-content: center;
-    align-items: center;
+/* Mobile guess prompt color */
+.guess-prompt-mobile {
+    color: #BEBEBE;
 }
 
-.mobile-menu-content {
-    width: 80%;
-    max-width: 320px;
-    background: #1E1E1E;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.8);
-}
 
-.mobile-menu-link {
-    display: block;
-    padding: 14px 0;
-    font-size: 1.2rem;
-    color: #E4E4E4;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.mobile-menu-link:hover {
-    color: #A78BFA;
-}
-
-.mobile-close-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #A78BFA;
-    color: #121212;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-/* ---------------------------------------------------------
-   GUESS MODAL
-----------------------------------------------------------*/
+/* ==========================================================
+   ABOUT PAGE TEXT + FAVORITE MOVIE BUTTONS
+   ========================================================== */
 .guess-modal {
     display: none;
     position: fixed;
@@ -457,11 +408,14 @@ body {
     font-weight: 600;
 }
 
+/* Guess input + button */
 .guess-input-group .form-control {
     height: 48px;
     color: #fff !important;
     border-radius: 12px 0 0 12px;
     font-size: 1rem;
+    background: #1c1c1c;
+    border: 1px solid #333;
 }
 
 .guess-input-group .form-control::placeholder {
@@ -476,6 +430,9 @@ body {
     justify-content: center;
     padding: 0 20px;
     border-radius: 0 12px 12px 0; !important;
+    background: #1c1c1c;
+    color: #ddd;
+    border: 1px solid #333;
 }
 
 .guess-submit-btn:hover {
@@ -483,17 +440,10 @@ body {
     color: #000 !important;
 }
 
-.guess-input-group .form-control,
-.guess-submit-btn {
-    background: #1c1c1c;
-    color: #ddd;
-    border: 1px solid #333;
-}
 
-
-/* ---------------------------------------------------------
-   UPLOAD CARD — MOBILE VERSION
-----------------------------------------------------------*/
+/* ==========================================================
+   UPLOAD CARD — MOBILE
+   ========================================================== */
 .upload-card {
     background: #1E1E1E;
     padding: 20px;
@@ -512,12 +462,6 @@ body {
     color: #E4E4E4;
 }
 
-.reset-btn-mobile {
-    border-radius: 12px;
-    font-weight: 700;
-    height: 48px;
-}
-
 .upload-subtitle {
     color: #BEBEBE;
     font-size: 0.95rem;
@@ -526,10 +470,16 @@ body {
     line-height: 1.4;
 }
 
+.reset-btn-mobile {
+    border-radius: 12px;
+    font-weight: 700;
+    height: 48px;
+}
 
-/* ---------------------------------------------------------
+
+/* ==========================================================
    UPLOAD CARD — DESKTOP VERSION
-----------------------------------------------------------*/
+   ========================================================== */
 .upload-card-desktop {
     background: #1E1E1E;
     padding: 25px;
@@ -580,9 +530,55 @@ body {
     text-align: center;
 }
 
-/* ---------------------------------------------------------
+
+/* ==========================================================
+   MOBILE MENU OVERLAY
+   ========================================================== */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-menu-content {
+    width: 80%;
+    max-width: 320px;
+    background: #1E1E1E;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+}
+
+.mobile-menu-link {
+    display: block;
+    padding: 14px 0;
+    font-size: 1.2rem;
+    color: #E4E4E4;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.mobile-menu-link:hover {
+    color: #A78BFA;
+}
+
+.mobile-close-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #A78BFA;
+    color: #121212;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+/* ==========================================================
    DESKTOP OVERRIDES (min-width: 768px)
-----------------------------------------------------------*/
+   ========================================================== */
 @media (min-width: 768px) {
 
     .left-side {
@@ -612,14 +608,6 @@ body {
     }
 
     .external-links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        margin-top: 16px;
+        justify-content: flex-start;
     }
-}
-
-.navbar .nav-link {
-    margin-left: 20px;
 }
