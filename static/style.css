@@ -176,8 +176,8 @@ body {
     border-radius: 12px;
     margin-bottom: 12px;
     box-shadow:
-        0 0 40px 12px rgba(167,139,250,0.45),
-        0 6px 18px rgba(0,0,0,0.6);
+        0 0 5px 5px rgba(167,139,250,0.45),
+        0 5px 5px rgba(0,0,0,0.6);
 }
 
 .movie-poster-placeholder {
