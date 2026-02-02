@@ -15,6 +15,21 @@
    Lavender light:  #C4B5FD
 ----------------------------------------------------------*/
 
+:root {
+    --bg: #121212;
+    --card: #1E1E1E;
+    --text: #E4E4E4;
+    --muted: #D4D4D4;
+    --muted-2: #BEBEBE;
+    --lav: #A78BFA;
+    --lav-light: #C4B5FD;
+    --ink: #121212;
+
+    --nav-h: 70px;
+    --rail: 1100px;
+    --pad: 16px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -28,8 +43,8 @@ html, body {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #121212;
-    color: #E4E4E4;
+    background-color: var(--bg);
+    color: var(--text);
     display: flex;
     flex-direction: column;
 }
@@ -38,24 +53,24 @@ body {
    NAVBAR
    ========================================================== */
 .top-bar {
-    background-color: #A78BFA;
-    height: 70px;
-}
-
-.nav-inner {
-    height: 70px;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    background-color: var(--lav);
+    height: var(--nav-h);
 }
 
 .navbar {
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+
+.nav-inner {
+    height: var(--nav-h);
+    width: 100%;
+    max-width: var(--rail);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
@@ -69,13 +84,14 @@ body {
 }
 
 .nav-link {
-    color: #ffffff !important;
+    color: #fff !important;
     font-weight: 600;
     margin: 0;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-    color: #ffffff !important;
+    color: #fff !important;
     text-shadow: 0 0 8px rgba(196,181,253,0.9);
 }
 
@@ -85,7 +101,6 @@ body {
         display: none !important;
     }
 }
-
 
 /* ==========================================================
    ANIMATED NEON HAMBURGER (→ X)
@@ -131,9 +146,8 @@ body {
     box-shadow: 0 0 12px #C8B4FF;
 }
 
-
 /* ==========================================================
-   MAIN LAYOUT
+   HOME LAYOUT
    ========================================================== */
 .home-shell {
     padding-top: 40px;
@@ -142,8 +156,9 @@ body {
 
 .home-grid {
     width: 100%;
-    max-width: 1100px;
+    max-width: var(--rail);
     margin: 0 auto;
+    padding: 0 var(--pad);
     display: grid;
     grid-template-columns: 1fr;
     gap: 28px;
@@ -163,16 +178,12 @@ body {
     width: 100%;
 }
 
-/* DESKTOP: Two columns side-by-side centered */
+/* DESKTOP: Two columns, tighter gap, cards anchored to rails */
 @media (min-width: 992px) {
     .home-grid {
         grid-template-columns: 1.4fr 0.9fr;
         justify-items: stretch;
-    }
-
-    .home-upload {
-        margin-left: auto;
-        align-self: flex-end;
+        gap: 12px;
     }
 
     .home-panel {
@@ -183,12 +194,24 @@ body {
     .home-panel form.text-center {
         align-self: center;
     }
-}
 
-.main-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    /* Anchor upload panel to the right rail */
+    .home-upload {
+        margin-left: auto;
+        align-self: flex-end;
+    }
+
+    /* remove "floating" widths on desktop so the gap is real */
+    .movie-card {
+        width: 100%;
+        margin: 0;
+    }
+
+    .upload-card-desktop {
+        width: 100%;
+        max-width: 420px;  /* controlled width but still rail-aligned */
+        margin-left: auto; /* keeps right edge on the rail */
+    }
 }
 
 /* ==========================================================
@@ -196,7 +219,7 @@ body {
    ========================================================== */
 .movie-card {
     width: 90%;
-    background-color: #1E1E1E;
+    background-color: var(--card);
     margin: 25px auto 10px;
     padding: 18px;
     border-radius: 12px;
@@ -234,7 +257,7 @@ body {
     align-items: center;
     font-size: 0.95rem;
     font-weight: 600;
-    color: #E4E4E4;
+    color: var(--text);
 }
 
 .movie-title {
@@ -246,7 +269,7 @@ body {
     font-size: 1rem;
     margin: 12px 0;
     line-height: 1.4;
-    color: #D4D4D4;
+    color: var(--muted);
 }
 
 .movie-date strong {
@@ -261,18 +284,38 @@ body {
 }
 
 .movie-extra strong {
-    color: #A78BFA;
+    color: var(--lav);
 }
 
+/* Desktop layout for poster + info */
+@media (min-width: 768px) {
+    .movie-card-content {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
 
+    .movie-poster {
+        width: 260px;
+        margin-right: 20px;
+    }
+
+    .movie-info {
+        flex: 1;
+    }
+
+    .external-links {
+        justify-content: flex-start;
+    }
+}
 
 /* ==========================================================
    PRIMARY BUTTONS (Pick, Upload, Reset)
    ========================================================== */
 .pick-btn,
 .btn-danger {
-    background-color: #A78BFA;
-    color: #121212;
+    background-color: var(--lav);
+    color: var(--ink);
     height: 48px;
     padding: 0 26px;
     font-size: 1.2rem;
@@ -285,13 +328,13 @@ body {
 
 .pick-btn:hover,
 .btn-danger:hover {
-    background-color: #C4B5FD;
-    color: #121212;
+    background-color: var(--lav-light);
+    color: var(--ink);
 }
 
 .btn-light {
     background: #2A2A2A;
-    color: #E4E4E4 !important;
+    color: var(--text) !important;
     font-weight: 600;
     border-radius: 10px;
     height: 48px;
@@ -300,9 +343,8 @@ body {
 
 .btn-light:hover {
     background: #3A3A3A !important;
-    color: #E4E4E4 !important;
+    color: var(--text) !important;
 }
-
 
 /* ==========================================================
    MOVIE CARD EXTERNAL BUTTONS (IMDb, LETTERBOXD, COPY MOVIE TITLE)
@@ -319,7 +361,7 @@ body {
 .external-btn,
 .copy-inline-btn,
 .copy-btn {
-    background: #A78BFA;
+    background: var(--lav);
     color: #000;
     padding: 6px 12px;
     border-radius: 8px;
@@ -333,13 +375,12 @@ body {
     justify-content: center;
     min-width: 90px;
     position: relative; 
-    transition: all 0.25s ease;
 }
 
 .external-btn:hover,
 .copy-inline-btn:hover,
 .copy-btn:hover {
-    box-shadow: 0 0 10px #A78BFA, 0 0 18px #A78BFA;
+    box-shadow: 0 0 10px var(--lav), 0 0 18px var(--lav);
     transform: translateY(-2px);
     text-decoration: none !important;
 }
@@ -367,7 +408,6 @@ body {
     opacity: 1;
 }
 
-
 /* ==========================================================
    ABOUT PAGE TEXT + FAVORITE MOVIE BUTTONS
    ========================================================== */
@@ -377,7 +417,7 @@ body {
     max-width: 800px;
     margin-top: 20px;
     text-align: left;
-    color: #D4D4D4;
+    color: var(--muted);
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -385,9 +425,9 @@ body {
 
 /* Favorite movie buttons */
 .about-movie-btn {
-    background-color: #1E1E1E;
+    background-color: var(--card);
     padding: 12px;
-    color: #E4E4E4;
+    color: var(--text);
     font-family: 'Cinzel', serif;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -399,18 +439,18 @@ body {
 }
 
 .about-movie-btn:hover {
-    background-color: #A78BFA;
-    color: #121212;
+    background-color: var(--lav);
+    color: var(--ink);
 }
 
 /* Mobile guess prompt color */
 .guess-prompt-mobile {
-    color: #BEBEBE;
+    color: var(--muted-2);
 }
 
 
 /* ==========================================================
-   ABOUT PAGE TEXT + FAVORITE MOVIE BUTTONS
+   GUESS MODAL
    ========================================================== */
 .guess-modal {
     display: none;
@@ -424,7 +464,7 @@ body {
 }
 
 .guess-modal-content {
-    background: #1E1E1E;
+    background: var(--card);
     padding: 20px;
     border-radius: 12px;
     width: 90%;
@@ -440,8 +480,8 @@ body {
 }
 
 .modal-close-btn {
-    background: #A78BFA;
-    color: #121212;
+    background: var(--lav);
+    color: var(--ink);
     padding: 10px 20px;
     border-radius: 8px;
     border: none;
@@ -476,16 +516,15 @@ body {
 }
 
 .guess-submit-btn:hover {
-    background: #A78BFA !important;
+    background: var(--lav) !important;
     color: #000 !important;
 }
-
 
 /* ==========================================================
    UPLOAD CARD — MOBILE
    ========================================================== */
 .upload-card {
-    background: #1E1E1E;
+    background: var(--card);
     padding: 20px;
     margin-top: 20px;
     width: 90%;
@@ -494,16 +533,8 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.7);
 }
 
-.upload-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #E4E4E4;
-}
-
 .upload-subtitle {
-    color: #BEBEBE;
+    color: var(--muted-2);
     font-size: 0.95rem;
     text-align: center;
     margin-bottom: 15px;
@@ -516,12 +547,11 @@ body {
     height: 48px;
 }
 
-
 /* ==========================================================
    UPLOAD CARD — DESKTOP VERSION
    ========================================================== */
 .upload-card-desktop {
-    background: #1E1E1E;
+    background: var(--card);
     padding: 25px;
     border-radius: 14px;
     width: 90%;
@@ -535,7 +565,7 @@ body {
 .upload-title-desktop {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #E4E4E4;
+    color: var(--text);
     text-align: center;
     margin-bottom: 15px;
     line-height: 1.4;
@@ -565,11 +595,10 @@ body {
 }
 
 .watched-count-desktop {
-    color: #BEBEBE;
+    color: var(--muted-2);
     margin-top: 10px;
     text-align: center;
 }
-
 
 /* ==========================================================
    MOBILE MENU OVERLAY
@@ -587,7 +616,7 @@ body {
 .mobile-menu-content {
     width: 80%;
     max-width: 320px;
-    background: #1E1E1E;
+    background: var(--card);
     padding: 25px;
     border-radius: 12px;
     text-align: center;
@@ -598,56 +627,44 @@ body {
     display: block;
     padding: 14px 0;
     font-size: 1.2rem;
-    color: #E4E4E4;
+    color: var(--text);
     font-weight: 700;
     text-decoration: none;
 }
 
 .mobile-menu-link:hover {
-    color: #A78BFA;
+    color: var(--lav);
 }
 
 .mobile-close-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background: #A78BFA;
-    color: #121212;
+    background: var(--lav);
+    color: var(--ink);
     border: none;
     border-radius: 8px;
     font-weight: bold;
 }
+
 /* ==========================================================
-   DESKTOP OVERRIDES (min-width: 768px)
+   HOME — DESKTOP TIGHTEN LAYOUT ADJUSTMENTS
    ========================================================== */
-@media (min-width: 768px) {
+@media (min-width: 992px) {
 
-    .left-side {
-        justify-content: center;
+    .home-grid {
+        gap: 12px;
     }
 
-    .movie-card-content {
-        flex-direction: row;
-        text-align: left;
-        align-items: flex-start;
+    /* Movie card should fill the left column rail */
+    .movie-card {
+        width: 100%;
+        margin: 0;
     }
 
-    .movie-poster {
-        width: 260px;
-        margin-right: 20px;
-    }
-
-    .movie-info {
-        flex: 1;
-    }
-
-    /* Right side becomes visible */
-    .right-side {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .external-links {
-        justify-content: flex-start;
+    /* Upload card should sit tight on the right rail */
+    .upload-card-desktop {
+        width: 100%;
+        max-width: 420px;
+        margin-left: auto;
     }
 }
