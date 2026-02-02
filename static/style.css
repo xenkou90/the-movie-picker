@@ -170,6 +170,11 @@ body {
         justify-items: stretch;
     }
 
+    .home-upload {
+        margin-left: auto;
+        align-self: flex-end;
+    }
+
     .home-panel {
         align-items: stretch;
     }
