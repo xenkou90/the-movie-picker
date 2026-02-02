@@ -651,20 +651,32 @@ body {
    ========================================================== */
 @media (min-width: 992px) {
 
-    .home-grid {
-        gap: 12px;
-    }
+  .home-grid {
+    grid-template-columns: 1.4fr 0.9fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 14px;
+    align-items: start;
+    justify-items: stretch;
+  }
 
-    /* Movie card should fill the left column rail */
-    .movie-card {
-        width: 100%;
-        margin: 0;
-    }
+  /* Place items explicitly */
+  .home-pick  { grid-column: 1; grid-row: 1; }
+  .home-movie { grid-column: 1; grid-row: 2; }
+  .home-upload{
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;      /* ✅ centers against movie-card row */
+  }
 
-    /* Upload card should sit tight on the right rail */
-    .upload-card-desktop {
-        width: 100%;
-        max-width: 420px;
-        margin-left: auto;
-    }
+  .movie-card {
+    width: 100%;
+    margin: 0;
+  }
+
+  .upload-card-desktop {
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;       /* keep it on the right rail */
+  }
 }

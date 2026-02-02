@@ -50,20 +50,20 @@
          ========================================================== -->
          <main class="home-shell">
 
-         <div class="home-grid">
-
-                <!-- BOX 1 - PICK FOR ME + MOVIE CARD -->
-
-                <section class="home-panel">
-
-                    <!-- Pick for Me BUTTON -->
-                    <form method="POST" class="text-center">
+                <!-- Pick Button ABOVE the grid -->
+                <div class="home-pick text-center">
+                    <form method="POST">
                         <input type="hidden" name="action" value="pick">
                         <button type="submit" class="btn btn-danger pick-btn">Pick for me!</button>
                     </form>
+                </div>
 
-                    <!-- MOVIE CARD (only shown if picked_movie exists) -->
-                     <div class="movie-card mt-4 fade-in">
+                <!-- GRID contains ONLY the two card -->
+                <div class="home-grid">
+
+                    <!-- LEFT: MOVIE CARD (only shown if picked_movie exists) -->
+                    <section class="home-panel">
+                    <div class="movie-card fade-in">
                         {% if picked_movie %}
                         <div class="movie-card-content">
 
@@ -139,7 +139,7 @@
                                     </a>
                                     {% endif %}
 
-                                    <button id="copy-btn" class="copy-inline-btn" typer="button">
+                                    <button id="copy-btn" class="copy-inline-btn" type="button">
                                         Copy movie title
                                     </button>
                                 </div>
@@ -150,42 +150,41 @@
                             <p class="text-center mb-0">No movie selected yet.</p>
                         {% endif %}
 
-                     </div>
-                </section>
+                    </div>
+                    </section>
 
 
-                <!-- BOX 2 - UPLOAD CSV + RESET + COUNT -->
-                
-                <aside class="home-panel">
+                    <!-- RIGHT: Upload Card -->
+                    <aside class="home-panel">
 
-                    <div class="upload-card-desktop home-upload">
+                        <div class="upload-card-desktop">
 
-                        <h4 class="upload-title-desktop text-center">
+                            <h4 class="upload-title-desktop text-center">
                             Go for Pick for Me! or toss in your CSV and I will reveal what you have not seen.
-                        </h4>
+                            </h4>
 
-                        <form method="POST" enctype="multipart/form-data" class="w-100">
+                            <form method="POST" enctype="multipart/form-data" class="w-100">
                             <input type="file" name="csv_file" class="form-control mb-3 upload-input-desktop">
                             <button type="submit" class="btn btn-danger w-100 upload-btn-desktop">Upload CSV</button>
-                        </form>
+                            </form>
 
-                        {% if upload_message is number %}
-                            <p class="upload-success-desktop">
-                                Houston, we have a CSV of {{ upload_message }} movies!
-                            </p>
-                        {% elif upload_message %}
-                            <p class="upload-error-desktop">{{ upload_message }}</p>
-                        {% endif %}
+                            {% if upload_message is number %}
+                                <p class="upload-success-desktop">
+                                    Houston, we have a CSV of {{ upload_message }} movies!
+                                </p>
+                            {% elif upload_message %}
+                                <p class="upload-error-desktop">{{ upload_message }}</p>
+                            {% endif %}
 
-                        <p class="watched-count-desktop">Watched movies: {{ watched_count }}</p>
+                            <p class="watched-count-desktop">Watched movies: {{ watched_count }}</p>
 
-                        <form method="POST" action="/reset" class="w-100 mt-2">
-                            <button class="btn btn-light w-100 reset-btn-desktop">Reset CSV</button>
-                        </form>
+                            <form method="POST" action="/reset" class="w-100 mt-2">
+                                <button class="btn btn-light w-100 reset-btn-desktop">Reset CSV</button>
+                            </form>
+                        </div>
+                    </aside>
+
                     </div>
-                </aside>
-
-                </div>
         </main>
 
 
