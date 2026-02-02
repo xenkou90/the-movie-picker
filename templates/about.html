@@ -16,45 +16,43 @@
 
 <body>
 
+
     <!-- ==========================================================
          NAVBAR — MOBILE FIRST
          ========================================================== -->
-<nav class="navbar navbar-dark top-bar navbar-expand-md">
-    <div class="container-fluid">
+    <nav class="navbar navbar-dark top-bar ">
+    <div class="nav-inner">
 
         <!-- Logo -->
         <a class="navbar-brand" href="/">
-            <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="The Movie Picker">
         </a>
 
         <!-- MOBILE HAMBURGER -->
-        <button class="hamburger-animated d-md-none" id="hamburger-btn">
+        <button class="hamburger-animated d-md-none" id="hamburger-btn" aria-label="Open menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
         <!-- DESKTOP NAV LINKS -->
-        <div class="collapse navbar-collapse justify-content-end d-none d-md-flex">
+        <div class="nav-right d-none d-md-flex">
             <a class="nav-link" href="{{ url_for('about') }}">About</a>
             <a class="nav-link" href="https://letterboxd.com/ne0n/" target="_blank">Follow me on Letterboxd!</a>
         </div>
 
     </div>
-</nav>
+    </nav>
 
 
     <!-- ==========================================================
          MAIN CONTENT — MOBILE FIRST
          ========================================================== -->
-    <div class="container-fluid main-container">
-        <div class="row h-100">
+    <main class="about-shell">
+        <section class="about-rail">
 
-            <!-- =====================================================
-                 LEFT SIDE (ALWAYS SHOWN — MOBILE & DESKTOP)
-                 ===================================================== -->
-            <div class="col-12 col-md-6 left-side d-flex flex-column justify-content-center align-items-start p-5">
-
+            <!-- A) ABOUT text -->
+            <section class="about-intro">
                 <p class="about-text">
                     I love watching movies and they are my favorite way to relax and escape. 
                     However, having seen so many over the years, choosing just one to watch has 
@@ -65,27 +63,20 @@
                     <br><br>
                     You can just hit the <strong>'Pick for me!'</strong> button or you can upload
                     a CSV file with your watched movies and it will recommend movies you haven't
-                    seen yet!
+                    seen yet!                  
                 </p>
+        </section>
 
-            </div> <!-- END LEFT SIDE -->
+        <!-- B) Title of GAME -->
+        <h4 class="about-title">
+            These are my top 5+1 favorite films!
+        </h4>
 
+        <!-- C) Guess block -->
+        {% include "components/guess_block.html" %}
 
-
-            <!-- =====================================================
-                 RIGHT SIDE (DESKTOP ONLY)
-                 Favorite Movies + Guessing Game
-                 ===================================================== -->
-            <div class="col-12 col-md-6 right-side d-none d-md-flex flex-column justify-content-center align-items-center p-5">
-                
-                <h3 class="text-white mb-4">These are my top 5+1 favorite films!</h3>
-
-                {% include "components/guess_block.html" %}
-            </div> <!-- END RIGHT SIDE -->
-
-        </div> <!-- END ROW -->
-    </div>
-
+        </section>
+    </main>
 
 
     <!-- ==========================================================
@@ -97,7 +88,6 @@
             <button id="guess-modal-close" class="modal-close-btn">Close</button>
         </div>
     </div>
-
 
 
     <!-- ==========================================================

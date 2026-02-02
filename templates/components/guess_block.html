@@ -1,29 +1,22 @@
-<div class="d-flex flex-column w-100 about-page-buttons" style="max-width: 350px;">
+<section class="about-movie-grid">
 
-    <a href="https://letterboxd.com/film/all-that-jazz/" target="_blank" class="about-movie-btn mb-2">All that Jazz (1979)</a>
-    <a href="https://letterboxd.com/film/sorcerer/" target="_blank" class="about-movie-btn mb-2">Sorcerer (1977)</a>
-    <a href="https://letterboxd.com/film/the-cook-the-thief-his-wife-her-lover/" target="_blank" class="about-movie-btn mb-2">The Cook, the Thief, His Wife & Her Lover (1989)</a>
-    <a href="https://letterboxd.com/film/ran/" target="_blank" class="about-movie-btn mb-2">Ran (1985)</a>
-    <a href="https://letterboxd.com/film/my-cousin-vinny/" target="_blank" class="about-movie-btn mb-2">My Cousin Vinny (1992)</a>
-    <a href="https://letterboxd.com/film/bloodsport/" target="_blank" class="about-movie-btn mb-2">Bloodsport (1988)</a>
-</div>
+    <a href="https://letterboxd.com/film/all-that-jazz/" target="_blank" class="about-movie-btn">All that Jazz (1979)</a>
+    <a href="https://letterboxd.com/film/sorcerer/" target="_blank" class="about-movie-btn">Sorcerer (1977)</a>
+    <a href="https://letterboxd.com/film/the-cook-the-thief-his-wife-her-lover/" target="_blank" class="about-movie-btn">The Cook, the Thief, His Wife & Her Lover (1989)</a>
 
-<p class="guess-prompt-mobile mt-3 mb-3 text-center">
+    <a href="https://letterboxd.com/film/ran/" target="_blank" class="about-movie-btn">Ran (1985)</a>
+    <a href="https://letterboxd.com/film/my-cousin-vinny/" target="_blank" class="about-movie-btn">My Cousin Vinny (1992)</a>
+    <a href="https://letterboxd.com/film/bloodsport/" target="_blank" class="about-movie-btn">Bloodsport (1988)</a>
+</section>
+
+<p class="about-guess-prompt">
     Which one do you think is my +1 and actually my favourite and the one I've seen hundreds of times?
 </p>
 
-<div class="input-group guess-input-group" style="max-width: 350px;">
-    <input id="guess-input" type="text" class="form-control guess-input-field" 
-        placeholder="Enter the movie name here">
-    <button id="guess-btn" type="button" class="about-movie-btn guess-submit-btn">Submit</button>
-</div>
-
-<p id="guess-result" class="mt-3"></p>
-
-<!-- Modal -->
- <div id="guess-modal" class="guess-modal">
-    <div class="guess-modal-content">
-        <img id="guess-modal-img" src="" alt="Result Image">
-        <button id="guess-modal-close" class="modal-close-btn">Close</button>
+<div class="guess-input-wrap">
+    <div class="input-group guess-input-group">
+        <input id="guess-input" type="text" class="form-control guess-input-field" placeholder="Enter the movie name here" placeholder="Enter the movie name here">
+    <button id="guess-btn" type="button" class="btn btn-light guess-submit-btn">Submit</button>
     </div>
- </div>
+    <p id="guess-result" class="mt-3"></p>
+</div>
