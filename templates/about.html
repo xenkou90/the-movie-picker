@@ -65,29 +65,22 @@
                     a CSV file with your watched movies and it will recommend movies you haven't
                     seen yet!                  
                 </p>
-        </section>
+            </section>
 
-        <!-- B) Title of GAME -->
-        <h4 class="about-title">
-            These are my top 5+1 favorite films!
-        </h4>
+            <!-- B) GUESSING GAME -->
+            <div class="about-game">
+            
+                {% include "components/guess_block.html" %}
 
-        <!-- C) Guess block -->
-        {% include "components/guess_block.html" %}
-
+                <div id="guess-modal" class="guess-modal">
+                    <div class="guess-modal-content">
+                        <img id="guess-modal-img" src="" alt="Result Image">
+                        <button id="guess-modal-close" class="modal-close-btn">Close</button>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-
-
-    <!-- ==========================================================
-         GUESSING GAME MODAL
-         ========================================================== -->
-    <div id="guess-modal" class="guess-modal">
-        <div class="guess-modal-content">
-            <img id="guess-modal-img" src="" alt="Result Image">
-            <button id="guess-modal-close" class="modal-close-btn">Close</button>
-        </div>
-    </div>
 
 
     <!-- ==========================================================

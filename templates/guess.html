@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess My +1</title>
+    <title>Guess My +1 - The Movie Picker</title>
 
     <!-- BOOTSTRAP -->
     <link
@@ -44,28 +44,28 @@
 </nav>
 
 
-
     <!-- ==========================================================
          MAIN CONTENT — FULL (MOBILE)
          ========================================================== -->
-    <div class="container-fluid main-container">
-        <div class="row justify-content-center">
 
-            <div class="col-12 col-md-8 d-flex flex-column align-items-center p-4">
+    <main class="guess-shell">
+        <h3 class="text-dark mb-3 text-center">
+            These are my top 5+1 favourite films!
+        </h3>
 
-                <!-- Title -->
-                <h3 class="text-dark mb-3 text-center">
-                    These are my top 5+1 favourite films!
-                </h3>
+        {% include "components/guess_block.html" %}
+    </main>
 
-                {% include "components/guess_block.html" %}
-
-            </div> <!-- END COLUMN -->
-
+    <!-- ==========================================================
+         GUESSING GAME MODAL
+         ========================================================== -->
+    <div id="guess-modal" class="guess-modal">
+        <div class="guess-modal-content">
+            <img id="guess-modal-img" src="" alt="Result Image">
+            <button id="guess-modal-close" class="modal-close-btn">Close</button>
         </div>
     </div>
 
-    
     <!-- ==========================================================
          MOBILE MENU
          ========================================================== -->
@@ -84,7 +84,6 @@
 
         </div>
     </div>
-
 
     <!-- JS -->
     <script src="{{ url_for('static', filename='main.js') }}"></script>
