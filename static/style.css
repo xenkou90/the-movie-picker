@@ -531,6 +531,21 @@ body {
 }
 
 /* ==========================================================
+   ABOUT — SIGNATURE
+   ========================================================== */
+.about-signature {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--muted-2);
+    margin-top: 80px;
+    padding-bottom: 24px;
+    text-align: center;
+    opacity: 0.65;
+    letter-spacing: 0.06em;
+}
+
+/* ==========================================================
    GUESS MODAL
    ========================================================== */
 .guess-modal {
