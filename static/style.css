@@ -106,7 +106,7 @@ body {
 }
 
 /* Hide desktop links on mobile */
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     .navbar-right {
         display: none !important;
     }
